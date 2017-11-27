@@ -1,0 +1,39 @@
+{
+  "projectName": "Test",
+  "description": "",
+  "backend": {
+    "appName": "Test",
+    "dbName": ""
+  },
+  "frontends": [
+    {
+      "appName": "Ng1",
+      "routes": [],
+      "components": []
+    }
+  ],
+  "roles": [],
+  "documents": [],
+  "entities": [
+    {
+      "name": "First",
+      "fields": {},
+      "relationships": {
+        "oneToParent": [],
+        "oneToMany": [],
+        "manyToMany": [],
+        "manyToOne": []
+      }
+    },
+    {
+      "name": "Second",
+      "fields": {},
+      "relationships": {
+        "oneToParent": [],
+        "oneToMany": [],
+        "manyToMany": [],
+        "manyToOne": []
+      }
+    }
+  ]
+}

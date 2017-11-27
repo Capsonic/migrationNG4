@@ -1,0 +1,78 @@
+Frontend Migration from Angualr 1 to Angular 4:
+  Services:
+    ☐ AppConfig.
+        ☐ A shared service to store the base URL and app name.
+    ☐ localStorage.
+        ☐ To do some research to find the best component for angular 4.
+    ☐ AuthService.
+        ☐ Login
+            ☐ Post to api/token
+            ☐ Store token on local storage
+            ☐ Retrieve user's role from backend
+        ☐ Logout
+            ☐ Remove info from local storage
+            ☐ Open login popup.
+        ☐ AuthInterceptor.
+            ☐ Intercept all requests and add header with token.
+            ☐ Intercepl all responses and for 401 error logout
+            
+    ☐ CRUDFactory.
+      To Refactor from Angular 1.x:
+        ☐ Function for handling all response errors.      
+        ☐ Known Exceptions show message instead of stack trace.
+        ☐ Show Stack Trace under a Technical Details button.
+        ☐ Decouple Alertify and ActivityIndicator.
+        ☐ Not always trigger alertify.
+        ☐ Validation Results Popup.
+        ☐ Response object: Result, Message, ErrorsList, ValidationsList, AdditionalData
+        ☐ Common Error Types: Modal, Message, Alert, Incident.
+    -------------------------------------
+    ☐ RFactory.
+    ☐ HotKeys.
+    ☐ RealTime.
+    ☐ Exceptions.js.
+
+  Controllers:
+    ☐ formController.
+    ☐ listController.    
+
+  Widgets/Components:
+    ☐ Layout:
+        ☐ Main Top Toolbar. (Login, Navigation, Logo, App Title, Notifications, ActivityIndiator).
+            ☐ Navigation Menu loaded async by User Role.
+        ☐ Bottom Toolbar for Lists. (Filtering, Search, Batch Remove, Create, Pagination, Sort).
+        ☐ Bottom Toolbar for Single Form. (Create, Checkout, Checkin, Finalize, Delete, Print, Reload/Refresh).
+    ☐ Spin Loading.
+      ☐ Display Spin Loading only when certain time is exceeded.
+    ☐ Pagination.
+    ☐ Modal.
+    ☐ Horizontal Lists sortable by Drag and Drop.
+    ☐ Selectize. (Single and Multiple selection).
+    ☐ Attachments.
+    ☐ Buttons that do not accept double click.
+    ☐ Confirm Buttons: Two actions in same space, maybe: first action just a click, second action: to slide to right.
+    ☐ Alertify.
+    ☐ Login.
+      ☐ Login should not redirect to home.
+    ☐ Selection from List.
+      ☐ Responsible.
+    ☐ Commenting.
+    ☐ ToDos.
+    ☐ Notifications.
+    ☐ Send Email.
+    -------------------------------------
+    ☐ Tables editables.
+      ☐ Display/Hide set of columns for list of items and store in local storage.
+    ☐ Tree-Grid sortable by Drag and Drop.
+      ☐ Display/Hide set of columns for list of items and store in local storage.
+    ☐ Chat.
+    
+  Views:
+    ☐ List.
+      ☐ Display/Hide set of columns for list of items and store in local storage.
+    ☐ Single Form.
+    ☐ Catalog.
+    ☐ About.
+    ☐ Search in system.
+    -------------------------------------
+    ☐ Recursive List.
