@@ -16,12 +16,19 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 //SERVICES
 import { LoginService } from './services/login.service';
 
+//COMPONENTS
+import { SigninComponent } from '../components/signin/signin';
+
+
 @NgModule({
   declarations: [
     MyApp,
+    //Pages
     LoginPage,
     HomePage,
-    ListPage
+    ListPage,
+    //Components
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +40,8 @@ import { LoginService } from './services/login.service';
     MyApp,
     LoginPage,
     HomePage,
-    ListPage
+    ListPage,
+    SigninComponent
   ],
   providers: [
     StatusBar,
