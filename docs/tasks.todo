@@ -5,16 +5,16 @@ Frontend Migration from Angualr 1 to Angular 4:
     ☐ localStorage.
         ☐ To do some research to find the best component for angular 4.
     ☐ AuthService.
-        ☐ Login
-            ☐ Post to api/token
-            ☐ Store token on local storage
-            ☐ Retrieve user's role from backend
-        ☐ Logout
-            ☐ Remove info from local storage
+        ☐ Login.
+            ☐ Post to api/token.
+            ☐ Store token on local storage.
+            ☐ Retrieve user's role from backend.
+        ☐ Logout.
+            ☐ Remove info from local storage.
             ☐ Open login popup.
         ☐ AuthInterceptor.
             ☐ Intercept all requests and add header with token.
-            ☐ Intercepl all responses and for 401 error logout
+            ☐ Intercepl all responses and for 401 error logout.
             
     ☐ CRUDFactory.
       To Refactor from Angular 1.x:
@@ -60,11 +60,14 @@ Frontend Migration from Angualr 1 to Angular 4:
     ☐ ToDos.
     ☐ Notifications.
     ☐ Send Email.
+    ☐ Toggle Navigation Toolbar.
+        ☐ Keep data when switching back.
     -------------------------------------
     ☐ Tables editables.
       ☐ Display/Hide set of columns for list of items and store in local storage.
     ☐ Tree-Grid sortable by Drag and Drop.
       ☐ Display/Hide set of columns for list of items and store in local storage.
+    ☐ Attachments with viewer for images/pdfs.
     ☐ Chat.
     
   Views:

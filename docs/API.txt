@@ -1,0 +1,74 @@
+| Entities Available |
+|====================|
+| First              |
+| Second             |
+| User               |
+
+
+|  HTTP  |                                                                                     |
+|  Verb  |                                       Endpoint                                      |
+|========|=====================================================================================|
+| GET    | http://apps.capsonic.com/AccountsAPI/api/Ping                                       |
+|        |                                                                                     |
+|        | Pings AccountsAPI Service.                                                          |
+|--------|-------------------------------------------------------------------------------------|
+| GET    | http://apps.capsonic.com/AccountsAPI/api/{entity}                                   |
+|        |                                                                                     |
+|        | Get all records for entity.                                                         |
+|--------|-------------------------------------------------------------------------------------|
+| GET    | http://apps.capsonic.com/AccountsAPI/api/{entity}/{id}                              |
+|        |                                                                                     |
+|        | Get single entity by id.                                                            |
+|--------|-------------------------------------------------------------------------------------|
+| GET    | http://apps.capsonic.com/AccountsAPI/api/{entity}/GetSingleWhere/{property}/{value} |
+|        |                                                                                     |
+|        | Get single entity where its property equals to value.                               |
+|--------|-------------------------------------------------------------------------------------|
+| GET    | http://apps.capsonic.com/AccountsAPI/api/{entity}/GetPage/{perPage}/{page}          |
+|        |                                                                                     |
+|        | Gets a page of records determined by:                                               |
+|        | perPage: How many records to display in a page.                                     |
+|        | page: The page number.                                                              |
+|        |                                                                                     |
+|        | Also accepts Query Parameters:                                                      |
+|        | filterGeneral: Will filter in all string properties found on this entity.           |
+|        | filterUser: Will filter User_AssignedToKey if available.                            |
+|        | [Property]: Will filter by existing property on this entity.                        |
+|--------|-------------------------------------------------------------------------------------|
+| POST   | http://apps.capsonic.com/AccountsAPI/api/{entity}/Create                            |
+|        |                                                                                     |
+|        | Gets a new instance of entity.                                                      |
+|--------|-------------------------------------------------------------------------------------|
+| POST   | http://apps.capsonic.com/AccountsAPI/api/{entity}                                   |
+|        |                                                                                     |
+|        | Inserts entity to the database.                                                     |
+|        |                                                                                     |
+|        | Expects body with Entity formatted as JSON.                                         |
+|--------|-------------------------------------------------------------------------------------|
+| PUT    | http://apps.capsonic.com/AccountsAPI/api/{entity}/id                                |
+|        |                                                                                     |
+|        | Updates an Entity by id.                                                            |
+|        |                                                                                     |
+|        | Expects body with Entity formatted as JSON.                                         |
+|--------|-------------------------------------------------------------------------------------|
+| DELETE | http://apps.capsonic.com/AccountsAPI/api/{entity}/Delete/{id}                       |
+|        |                                                                                     |
+|        | Removes an entity by id.                                                            |
+|--------|-------------------------------------------------------------------------------------|
+| POST   | http://apps.capsonic.com/AccountsAPI/api/{entity}/RemoveEntity                      |
+|        |                                                                                     |
+|        | Removes an entity.                                                                  |
+|        |                                                                                     |
+|        | Expects body with Entity formatted as JSON.                                         |
+|--------|-------------------------------------------------------------------------------------|
+
+
+All responses (except for Ping) are CommonResponse objects JSONs:
+
+| CommonResponse Properties |          Description           |
+|===========================|================================|
+| ErrorThrown               | Indicates if error was thrown. |
+| ResponseDescription       | Some response description.     |
+| Result                    | The requested resource.        |
+| AdditionalData            | Any additional data.           |
+| ErrorType                 | MESSAGE or INCIDENT            |
