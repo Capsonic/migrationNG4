@@ -1,3 +1,4 @@
+using Reusable;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -17,6 +18,19 @@ namespace ReusableWebAPI.Controllers
         {
             return "Test is working!";
         }
+
+        //-----
+        [HttpGet, Route("api/ping/pingError")]
+        public CommonResponse pingError()
+        {
+            CommonResponse response = new CommonResponse();
+            
+            response.Error(new KnownError("Test has failed this is in porpouse error"));
+            
+            return response;
+        }
+        //-----
+
 
         // POST: api/Ping
         public void Post([FromBody]string value)

@@ -3,13 +3,15 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title class="main-bar">
+      <label class="lbl-main">NG 2 app</label>
+    <button class="btn-administrator" (click)="openMenu()">
+      Administrator
+    </button>
+  </ion-title>
   </ion-navbar>
 </ion-header>
 <br> 
   <ion-content padding class="action-sheets-basic-page">
-    <button ion-button block (click)="openMenu()">
-      Administrator
-    </button>
-
+    <button class="btn-ping"(click)="pingTest()">Ping test</button>
 </ion-content>

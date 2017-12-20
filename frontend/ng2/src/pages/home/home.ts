@@ -1,17 +1,25 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { Platform, ActionSheetController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
+import { NavController, AlertController, Platform, ActionSheetController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular/components/modal/modal-controller';
+import { LoginComponent } from '../../components/login/login';
+import { InterceptorService } from '../../app/services/interceptor.service';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
+  response: string;
+  errorThrown: string;
+
   constructor(
     public platform: Platform,
     public actionsheetCtrl: ActionSheetController,
-    public nav: NavController
+    public nav: NavController,
+    public modal: ModalController,
+    public interceptorService: InterceptorService,
+    public alertCtrl: AlertController
   ) { }
  
   openMenu() {
@@ -31,7 +39,9 @@ export class HomePage {
           icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
           handler: () => {
             localStorage.clear();
-            this.nav.popToRoot();
+            // this.nav.popToRoot();
+            let profileModal = this.modal.create(LoginComponent, null, {showBackdrop: true,enableBackdropDismiss:false});
+            profileModal.present();
           }
         },
         {
@@ -46,4 +56,18 @@ export class HomePage {
     });
     actionSheet.present();
   }
+
+  pingTest(){
+    this.interceptorService.pingTest().subscribe(results => {
+            this.response = results.ResponseDescription;
+            this.errorThrown =  results.ErrorThrown;
+            let alert = this.alertCtrl.create({
+              title: 'Error',
+              subTitle: this.response,
+              buttons: ['OK']
+            });
+            alert.present();
+          });
+
+      }
 }
