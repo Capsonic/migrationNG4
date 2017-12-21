@@ -3,11 +3,13 @@ import { Response, Http, Headers, RequestOptions } from '@angular/http';
 import { IConfig } from './IConfig';
 import { ICommonResponse } from './ICommonResponse';
 import { Config } from '../app/config';
+import { IEntity } from './IEntity';
 
 export class CRUDFactory {
     baseUrl: string = Config.API_URL;
     http: Http;
-    
+    cache: any[];
+
     constructor(private config: IConfig ){
     }
  
@@ -29,6 +31,7 @@ export class CRUDFactory {
         console.log('entra a crud factory createEntity |' + this.baseUrl  + '/create');
         return this.http.post(this.baseUrl +  this.config.endPoint,  '=' + encodeURIComponent( JSON.stringify(object)) , this.addAuthorization())
         .map(this.extractData)
+        .map(o => o.Result)
         .catch(this.generalError);
     }
 
@@ -76,5 +79,17 @@ export class CRUDFactory {
             console.log('Redireccionar a login');
         }
         return Observable.throw(error.statusText);
+    }
+
+    save(oEntity): Observable<any> {
+        return this.createEntity(oEntity);
+    }
+
+    remove(): Observable<any> {
+        return Observable.empty();
+    }
+
+    getById(id: number): IEntity {
+        return null;
     }
 }
