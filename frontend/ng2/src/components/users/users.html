@@ -2,7 +2,7 @@
   <section class="section-users">
     <h1>Users</h1>
     <div class="div-users">
-      <div *ngFor="let user of users">
+      <div *ngFor="let user of users" (click)="openUser(user)">
         <label class="label-users">{{ user.Value}} </label>
         <button class="button-trash" (click)="deleteUser(user)" (ngModel)="user" >
           <ion-icon name="trash"></ion-icon>

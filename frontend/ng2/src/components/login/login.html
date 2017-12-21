@@ -12,7 +12,7 @@
     <button ion-button type="submit" (Click)="login()" class="btn-login">
       <b>Login</b>
     </button>
-    <div class="error-message" *ngIf='!errorMessage == "" '>
+    <div class="error-message" *ngIf='errorMessage'>
       <label >{{ errorMessage }}</label>
     </div>
   </form>
