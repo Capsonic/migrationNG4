@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
-import { HttpModule, Http } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 
 //APPS
@@ -13,12 +13,20 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 //SERVICES
-import { LoginService } from './services/login.service';
-import { InterceptorService } from './services/interceptor.service';
+import { LoginService } from '../services/login.service';
+import { InterceptorService } from '../services/interceptor.service';
 
 
 //COMPONENTS
 import { LoginComponent } from '../components/login/login';
+import { UsersComponent } from '../components/users/users';
+
+//PROVIDERS
+import { FirstServiceProvider } from '../providers/first-service';
+import { UserServiceProvider } from '../providers/user-service';
+import { SecondServiceProvider } from '../providers/second-service';
+import { UserFormComponent } from '../components/user-form/user-form';
+import { UsersPage } from '../pages/users/users';
 
 
 @NgModule({
@@ -27,8 +35,11 @@ import { LoginComponent } from '../components/login/login';
     //Pages
     HomePage,
     ListPage,
+    UsersPage,
     //Components
-    LoginComponent
+    LoginComponent,
+    UsersComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +51,10 @@ import { LoginComponent } from '../components/login/login';
     MyApp,
     HomePage,
     ListPage,
-    LoginComponent
+    UsersPage,
+    LoginComponent,
+    UsersComponent,
+    UserFormComponent
   ],
   providers: [
     StatusBar,
@@ -48,7 +62,9 @@ import { LoginComponent } from '../components/login/login';
     LoginService,
     InterceptorService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    { provide: Http, useClass: InterceptorService }
+    FirstServiceProvider,
+    UserServiceProvider,
+    SecondServiceProvider
   ]
 })
 export class AppModule {}

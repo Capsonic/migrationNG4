@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, Platform, ActionSheetController } from 'ionic-angular';
-import { ModalController } from 'ionic-angular/components/modal/modal-controller';
+import { Platform, ActionSheetController, ModalController, AlertController } from 'ionic-angular';
+
 import { LoginComponent } from '../../components/login/login';
-import { InterceptorService } from '../../app/services/interceptor.service';
+import { UserServiceProvider } from '../../providers/user-service';
+import { NavController } from 'ionic-angular/navigation/nav-controller';
 
 @Component({
   selector: 'page-home',
@@ -12,16 +13,21 @@ import { InterceptorService } from '../../app/services/interceptor.service';
 export class HomePage {
   response: string;
   errorThrown: string;
+  users: string[]=[];
+  user: string;
+  LoggedUser: string;
+  pingResult: string;
+  userPage: boolean = false;
 
   constructor(
     public platform: Platform,
     public actionsheetCtrl: ActionSheetController,
-    public nav: NavController,
     public modal: ModalController,
-    public interceptorService: InterceptorService,
-    public alertCtrl: AlertController
+    public alert: AlertController,
+    public nav: NavController,
+    public userSerivceProvider: UserServiceProvider
   ) { }
- 
+
   openMenu() {
     let actionSheet = this.actionsheetCtrl.create({
       title: 'Administrator',
@@ -39,8 +45,7 @@ export class HomePage {
           icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
           handler: () => {
             localStorage.clear();
-            // this.nav.popToRoot();
-            let profileModal = this.modal.create(LoginComponent, null, {showBackdrop: true,enableBackdropDismiss:false});
+            let profileModal = this.modal.create(LoginComponent, null, { showBackdrop: true, enableBackdropDismiss: false });
             profileModal.present();
           }
         },
@@ -56,18 +61,24 @@ export class HomePage {
     });
     actionSheet.present();
   }
+  
+  ionViewDidLoad(){
+    this.LoggedUser = 'Erick Holguin';
+    // this.LoggedUser = localStorage.getItem('userName');
+  }
 
-  pingTest(){
-    this.interceptorService.pingTest().subscribe(results => {
-            this.response = results.ResponseDescription;
-            this.errorThrown =  results.ErrorThrown;
-            let alert = this.alertCtrl.create({
-              title: 'Error',
-              subTitle: this.response,
-              buttons: ['OK']
-            });
-            alert.present();
-          });
+  userList() {
+    this.userSerivceProvider.loadEntities().subscribe(results => {
+      this.users = results.Result;
+    });
+  }
 
-      }
+
+  getUser(){
+    this.userSerivceProvider.loadEntity(1).subscribe(results => {
+      this.user = results.Result;
+      // console.log('userService.loadEntity | '+ JSON.stringify(results));
+    });
+  }
+  
 }

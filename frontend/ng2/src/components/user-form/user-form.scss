@@ -1,0 +1,67 @@
+user-form {
+}
+
+.card-userForm{
+    height:120%;
+    border-radius: 5px;
+    background-color: white;
+    width:100%;
+}
+
+.title-userForm {
+    padding: 1%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: rgb(167, 167, 167);
+}
+
+.form-userForm {
+    margin: auto;
+    width: 100%;
+    max-width: 400px;
+}
+
+.passwordField{
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+    margin: 1em;
+    padding: 2em;
+}
+.passwordField>label{
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.passwordField>input{
+    width: 100%;
+}
+
+.item{
+    padding: 1em;
+}
+
+.btn-userForm{
+    width: 100%;
+    background-color: rgb(64, 115, 255);
+}
+  
+.error-message{
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #fc3838ce;
+    text-align: center;
+    color: white;
+    padding: 3%;
+    border-radius: 5px;
+    width: 95%;
+    margin: auto;
+    margin-top: 2%;
+  }
+
+  @media(max-width: 450px){
+    .card-login{
+      margin-top:15%;
+    }
+  }

@@ -1,0 +1,45 @@
+<div class="card-userForm">
+  <div class="title-userForm">
+    <label>Add new user</label>
+  </div>
+
+  <form #userForm="ngForm" (ngSubmit)="submitForm(userForm.value)" class="form-userForm" autocomplete="off" novalidate>
+    
+    <button (click)="createInstance()" type="button"> instance</button>
+    <!-- <pre>{{ baseEntity | json }}</pre> -->
+
+
+    <ion-item class="item">
+      <ion-input type="text" (ngModel)="Value" placeholder="Value"  name="Value"   required autofocus></ion-input>
+    </ion-item>
+    
+    <ion-item class="item">
+      <ion-input type="text" (ngModel)="UserName" id="UserName" name="UserName" placeholder="Username" required autofocus></ion-input>
+    </ion-item>
+    
+    <ion-item class="item">
+      <ion-label>Role</ion-label>
+      <ion-select (ngModel)="Role" name="Role">
+        <ion-option value="User">User</ion-option>
+        <ion-option value="Doctor">Doctor</ion-option>
+        <ion-option value="RH">RH</ion-option>
+        <ion-option value="Finance">Finance</ion-option>
+      </ion-select>
+    </ion-item>
+    
+    <div class="passwordField">
+      <label>Password</label><br>
+        <input type="password" (ngModel)="Password" id="password" name="password" required autofocus/><br><br>
+      <label>Confirm password</label><br>
+        <input type="password" (ngModel)="ConfirmPassword" id="passwordConfirm" name="ConfirmPassword"
+          required autofocus/>
+    </div>
+    
+    <button ion-button type="submit"  class="btn-login">
+      submit
+    </button>
+    <div class="error-message" *ngIf='!errorMessage == "" '>
+      <label>{{ errorMessage }}</label>
+    </div>
+  </form>
+</div>

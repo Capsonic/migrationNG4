@@ -1,0 +1,33 @@
+users {  
+}
+.section-users{
+    width: 60%;
+    margin: auto;
+}
+
+.div-users{
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+
+.div-users>div{
+    padding: 18px;
+    font-size: 16px;
+}
+
+.button-trash{
+    float: right;
+    box-shadow: 0 2px 2px 0 rgba(0,8,0,0.2);
+}
+.btn-add-users{
+    float: right;
+    height: 25px;
+    width: 25px;
+    border: 0.5px solid #666666;
+    box-shadow: 0 2px 4px 4px rgba(0, 8, 0, 0.2);
+    background-color: #00a15e;
+    padding: 2%;
+    color: white;
+    border-radius: 50px;
+    font-size: 32px;
+    font-weight: 900;
+}

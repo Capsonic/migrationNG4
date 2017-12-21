@@ -6,10 +6,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import { LoginComponent } from '../components/login/login';
+import { UsersComponent } from '../components/users/users';
+import { UsersPage } from '../pages/users/users';
 
 @Component({
   templateUrl: 'app.html',
@@ -36,19 +37,18 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Users', component: UsersPage }
     ];
 
   }
+
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
 
-    let profileModal = this.modal.create(LoginComponent, null, { enableBackdropDismiss:false});
+    let profileModal = this.modal.create(LoginComponent, null, { enableBackdropDismiss:true});
     profileModal.dismiss(false);
     profileModal.present();
   }
@@ -57,5 +57,10 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  openUserList(){
+    this.nav.push(UsersPage);
+
   }
 }
