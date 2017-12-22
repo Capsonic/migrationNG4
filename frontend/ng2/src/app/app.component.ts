@@ -1,16 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { Nav, Platform, ActionSheetController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-
+//PAGES
 import { HomePage } from '../pages/home/home';
-
-import { ModalController } from 'ionic-angular/components/modal/modal-controller';
-import { LoginComponent } from '../components/login/login';
-import { UsersComponent } from '../components/users/users';
 import { UsersPage } from '../pages/users/users';
+
+//COMPONENTS
+import { LoginComponent } from '../components/login/login';
 
 @Component({
   templateUrl: 'app.html',
@@ -20,47 +18,65 @@ import { UsersPage } from '../pages/users/users';
 })
 
 export class MyApp {
+  LoggedUser: string;
   @ViewChild(Nav) nav: Nav;
-
   rootPage: any = HomePage;
-
   pages: Array<{ title: string, component: any }>;
 
-  constructor(
-    public platform: Platform,
-    public statusBar: StatusBar,
-    public splashScreen: SplashScreen,
-    public modal: ModalController
-  ) {
+  constructor(public platform: Platform, public modal: ModalController,public actionsheetCtrl: ActionSheetController ) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
+    
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Users', component: UsersPage }
     ];
-
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-
-    let profileModal = this.modal.create(LoginComponent, null, { enableBackdropDismiss:true});
-    profileModal.dismiss(false);
-    profileModal.present();
+    if (!localStorage.getItem('access_token')) {
+      console.log('si esta vacio' +  this.LoggedUser);
+      let profileModal = this.modal.create(LoginComponent, null, { enableBackdropDismiss: true });
+      profileModal.dismiss(false);
+      profileModal.present();
+    }
+    this.LoggedUser = localStorage.getItem('userName');
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
 
-  openUserList(){
+  openUserList() {
     this.nav.push(UsersPage);
-
   }
-}
+  
+  openMenu(){
+      let actionSheet = this.actionsheetCtrl.create({
+        title: 'Administrator',
+        cssClass: 'action-sheets-basic-page',
+        buttons: [
+          {
+            text: 'Profile', icon: !this.platform.is('ios') ? 'share' : null, handler: () => {
+              console.log('profile clicked')
+            }
+          },
+          {
+            text: 'Logout', icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
+            handler: () => {
+              localStorage.clear();
+              let profileModal = this.modal.create(LoginComponent, null, { showBackdrop: true, enableBackdropDismiss: false });
+              profileModal.present();
+            }
+          },
+          {
+            text: 'Cancel',role: 'cancel', icon: !this.platform.is('ios') ? 'close' : null,
+            handler: () => { console.log('Cancel clicked');  }
+          }
+        ]
+      });
+      actionSheet.present();
+    }
+
+  
+  }
+

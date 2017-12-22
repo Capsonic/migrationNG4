@@ -2,42 +2,50 @@
   <div class="title-userForm">
     <label>Add new user</label>
   </div>
-  <!-- <form #userForm="ngForm" (ngSubmit)="submitForm(userForm.value)" class="form-userForm" autocomplete="off" novalidate> -->
   <div>
-    <!-- <button (click)="createInstance()" type="button"> instance</button> -->
     <ion-item class="item">
       <ion-input type="text" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Value" placeholder="Value" required autofocus></ion-input>
     </ion-item>
     <ion-item class="item">
-      <ion-input type="text" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.UserName" id="UserName" placeholder="Username" required autofocus></ion-input>
+      <ion-input type="text" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.UserName" id="UserName" placeholder="Username"
+        required autofocus></ion-input>
+    </ion-item>
+    <p class="p-role">Role</p>
+    <select (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Role" class="select-role">
+      <option>Administrator</option>
+      <option>User</option>
+      <option>Doctor</option>
+      <option>RH</option>
+      <option>Finance</option>
+    </select>
+
+    <ion-item class="item">
+      <ion-input type="password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Password" id="password" required></ion-input>
     </ion-item>
     <ion-item class="item">
-      <ion-label>Role</ion-label>
-      <ion-select (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Role">
-        <ion-option>Administrator</ion-option>
-        <ion-option>User</ion-option>
-        <ion-option>Doctor</ion-option>
-        <ion-option>RH</ion-option>
-        <ion-option>Finance</ion-option>
-      </ion-select>
+      <ion-input type="password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConfirmPassword" id="passwordConfirm" required>
+    </ion-input>
     </ion-item>
+
     <div class="passwordField">
       <label>Password</label>
       <br>
-      <input type="password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Password" id="password" required autofocus/>
+      <input type="password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Password" id="password" required/>
       <br>
       <br>
       <label>Confirm password</label>
       <br>
-      <input type="password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConfirmPassword" id="passwordConfirm" required autofocus/>
+      <input type="password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConfirmPassword" id="passwordConfirm"
+        required/>
     </div>
-    <button ion-button type="submit" (click)="save()" class="btn-login">
-      submit
-    </button>
+    <div class="div-buttons">
+      <button ion-button (click)="close" class="btn-close">Close</button>
+      <button ion-button type="submit" (click)="save()" class="btn-submit">submit</button>
+    </div>
     <div class="error-message" *ngIf='!errorMessage == "" '>
       <label>{{ errorMessage }}</label>
     </div>
-    <!-- </form> -->
   </div>
-  <pre style="background: gray; min-height: 20px;">{{ baseEntity | json }}</pre>
 </div>
+<br>
+<pre style="background: gray; min-height: 20px;">{{ baseEntity | json }}</pre>

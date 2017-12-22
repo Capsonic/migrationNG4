@@ -22,6 +22,19 @@ user-form {
     max-width: 400px;
 }
 
+.p-role{
+    margin-left: 1.5em;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.select-role{
+    margin-left: 1.5em;
+    font-weight: 800;
+    width: 90%;
+    height: 40px;
+}
+
 .passwordField{
     box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
     0px 8px 10px 1px rgba(0, 0, 0, 0.14),
@@ -42,8 +55,19 @@ user-form {
     padding: 1em;
 }
 
-.btn-userForm{
-    width: 100%;
+.div-buttons{
+    display: inline;
+}
+
+.btn-close{
+    float: right;
+    width: 25%;
+    background-color: gray;
+    }
+
+.btn-submit{
+    width: 25%;
+    float: right;
     background-color: rgb(64, 115, 255);
 }
   

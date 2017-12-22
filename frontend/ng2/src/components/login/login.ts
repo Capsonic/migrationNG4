@@ -14,23 +14,23 @@ export class LoginComponent {
   constructor(public nav: NavController, private loginService: LoginService) {
   }
 
-  login(formValues){
-    this.nav.pop();
-  }
+  // login(formValues){
+  //   this.nav.pop();
+  // }
 
-  // login(formValues) {
-  //   if (formValues.userName != null || formValues.password != null) {
-  //     this.errorMessage = 'Username or Password fields are missing';
-  //   } else{ 
-  //     // const data = 'grant_type=password&userName=' + formValues.userName + '&password=' + formValues.password;
-  //     const data = 'grant_type=password&userName=erickhp12&password=webstar12';
+  login(formValues) {
+    if (!formValues.userName || !formValues.password) {
+      this.errorMessage = 'Username or Password fields are missing';
+    } else{ 
+      const data = 'grant_type=password&userName=' + formValues.userName + '&password=' + formValues.password;
+      // const data = 'grant_type=password&userName=erickhp12&password=webstar12';
       
-  //     this.loginService.getToken(data).subscribe(results => {
-  //       localStorage.setItem('access_token', results.access_token);
-  //       localStorage.setItem('userName', formValues.userName);
-  //       this.nav.pop();
-  //       });
-  //     }
-  //   }
+      this.loginService.getToken(data).subscribe(results => {
+        localStorage.setItem('access_token', results.access_token);
+        localStorage.setItem('userName', formValues.userName);
+        this.nav.pop();
+        });
+      }
+    }
 
 }
