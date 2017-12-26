@@ -10,6 +10,7 @@ using System.Data.Entity;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace BusinessSpecificLogic.Logic
 {
@@ -53,7 +54,7 @@ namespace BusinessSpecificLogic.Logic
 
                 if (entity.Password.Length < 6)
                 {
-                    throw new KnownError("[User Name] has to have at least 6 characters.");
+                    throw new KnownError("[Password] has to have at least 6 characters.");
                 }
             }
 
@@ -155,6 +156,7 @@ namespace BusinessSpecificLogic.Logic
             entity.EmailPassword = entity.EmailPassword;
 
         }
+
         private byte[] ConvertBitMapToByteArray(Bitmap bitmap)
         {
             byte[] result = null;
@@ -222,5 +224,30 @@ namespace BusinessSpecificLogic.Logic
                 #endregion
             }
         }
+
+
+        protected override void addDbWheresWhenPaging(List<Expression<Func<User, bool>>> database_wheres)
+        {
+            database_wheres.Add(u => u.sys_active == true && u.Role != "Administrator");
+        }
+
+        public override CommonResponse GetAll()
+        {
+            CommonResponse response = new CommonResponse();
+            IEnumerable<User> entities;
+            try
+            {
+                repository.byUserId = loggedUser.UserID;
+                entities = repository.GetList(u => u.Value, u => u.sys_active == true && u.Role != "Administrator");
+            }
+            catch (Exception e)
+            {
+                return response.Error("ERROR: " + e.ToString());
+            }
+
+            return response.Success(entities);
+
+        }
+
     }
 }
