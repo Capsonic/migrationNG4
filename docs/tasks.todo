@@ -65,6 +65,7 @@ Frontend Migration from Angualr 1 to Angular 4:
             ☐ afterLoad().
             ☐ afterCreate().
             ☐ afterRemove().
+            ☐ afterSave().
 
     ☐ listController.
         Methods:
