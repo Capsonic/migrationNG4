@@ -1,4 +1,5 @@
-users {  
+users {
+    display: inline; 
 }
 .section-users{
     width: 60%;
@@ -23,8 +24,8 @@ users {
     height: 25px;
     width: 25px;
     border: 0.5px solid #666666;
-    box-shadow: 0 2px 4px 4px rgba(0, 8, 0, 0.2);
-    background-color: #00a15e;
+    box-shadow: 0 2px 8px 4px rgba(0, 8, 0, 0.2);
+    background-color: #797979;
     padding: 2%;
     color: white;
     border-radius: 50px;

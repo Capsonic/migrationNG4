@@ -32,11 +32,14 @@ export abstract class FormController{
 	}
 
 	save() {
-
+		console.log('form controller.ts save method');
+		console.log(this.baseEntity);
+		console.log(this.baseEntity.editMode);
 		if(this.baseEntity.editMode) {
 			return this.config.service.save(this.baseEntity)
 				.subscribe(oEntity => {
 						this.baseEntity = oEntity;
+						this.afterSave();
 					});
 		}
 
@@ -87,6 +90,8 @@ export abstract class FormController{
 	abstract afterLoad();
 
 	abstract afterCreate();
+
+	abstract afterSave();
 
 	abstract afterRemove();
 	//End Hooks

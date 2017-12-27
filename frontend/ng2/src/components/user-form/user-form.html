@@ -6,10 +6,12 @@
     <ion-item class="item">
       <ion-input type="text" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Value" placeholder="Value" required autofocus></ion-input>
     </ion-item>
+
     <ion-item class="item">
       <ion-input type="text" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.UserName" id="UserName" placeholder="Username"
         required autofocus></ion-input>
     </ion-item>
+
     <p class="p-role">Role</p>
     <select (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Role" class="select-role">
       <option>Administrator</option>
@@ -20,31 +22,26 @@
     </select>
 
     <ion-item class="item">
-      <ion-input type="password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Password" id="password" required></ion-input>
-    </ion-item>
-    <ion-item class="item">
-      <ion-input type="password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConfirmPassword" id="passwordConfirm" required>
-    </ion-input>
+      <ion-input type="password" placeholder="Password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Password" id="password"
+        required></ion-input>
     </ion-item>
 
-    <div class="passwordField">
-      <label>Password</label>
-      <br>
-      <input type="password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Password" id="password" required/>
-      <br>
-      <br>
-      <label>Confirm password</label>
-      <br>
-      <input type="password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConfirmPassword" id="passwordConfirm"
-        required/>
-    </div>
+    <ion-item class="item">
+      <ion-input type="password" placeholder="Confirm password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConfirmPassword"
+        required></ion-input>
+    </ion-item>
+
     <div class="div-buttons">
-      <button ion-button (click)="close" class="btn-close">Close</button>
+      <button ion-button (click)="close()" class="btn-close">Close</button>
       <button ion-button type="submit" (click)="save()" class="btn-submit">submit</button>
     </div>
+    
+    <br>
+
     <div class="error-message" *ngIf='!errorMessage == "" '>
-      <label>{{ errorMessage }}</label>
+      <label>hola {{ errorMessage }}</label>
     </div>
+
   </div>
 </div>
 <br>

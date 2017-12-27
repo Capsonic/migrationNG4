@@ -4,15 +4,25 @@ import { IConfig } from './IConfig';
 import { ICommonResponse } from './ICommonResponse';
 import { Config } from '../app/config';
 import { IEntity } from './IEntity';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 export class CRUDFactory {
     baseUrl: string = Config.API_URL;
     http: Http;
     cache: any[];
 
-    constructor(private config: IConfig ){
+    constructor(private config: IConfig,public toastr: ToastsManager ){
     }
- 
+    
+    addAuthorization(){
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let authorization = new URLSearchParams();
+        let options = new RequestOptions({ headers: headers, params: authorization });
+
+        headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
+        return options
+    }
+
     loadEntities(params?){  
         const result = this.http.get(this.baseUrl + this.config.endPoint, this.addAuthorization())
         .map(this.extractData)
@@ -49,25 +59,19 @@ export class CRUDFactory {
         .catch(this.generalError);
     }
 
-    addAuthorization(){
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        let authorization = new URLSearchParams();
-        let options = new RequestOptions({ headers: headers, params: authorization });
-
-        headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
-        return options
-    }
-    
     private extractData(res: Response) {
         const body:ICommonResponse = res.json();
+        console.log(body);
         if (body.ErrorThrown){
             switch(body.ErrorType){
                 case "MESSAGE":
-                console.log('errorThrown true ' + body.ResponseDescription);
-                break;
+                console.log('2017 error' + body.ResponseDescription);
+                this.toastr.error('ok', 'Error');
             }
+            console.log('--1--');
             throw body;
         }
+        console.log('--2--' + body);
         return body;  
     }
  
