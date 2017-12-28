@@ -4,14 +4,19 @@ import { IConfig } from './IConfig';
 import { ICommonResponse } from './ICommonResponse';
 import { Config } from '../app/config';
 import { IEntity } from './IEntity';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastController } from 'ionic-angular';
+import { Injector, ReflectiveInjector } from '@angular/core';
+import { Toast } from '@ionic-native/toast';
 
-export class CRUDFactory {
+export abstract class CRUDFactory {
     baseUrl: string = Config.API_URL;
     http: Http;
     cache: any[];
-
-    constructor(private config: IConfig,public toastr: ToastsManager ){
+    private toast: Toast;
+    constructor(private config: IConfig
+    ) {
+        // let injector = ReflectiveInjector.resolveAndCreate([ToastController]);
+        // this.toastr = injector.get(ToastController);
     }
     
     addAuthorization(){
@@ -38,7 +43,7 @@ export class CRUDFactory {
     }
 
     createEntity(object){
-        console.log('entra a crud factory createEntity |' + this.baseUrl  + '/create');
+        let self = this;
         return this.http.post(this.baseUrl +  this.config.endPoint,  '=' + encodeURIComponent( JSON.stringify(object)) , this.addAuthorization())
         .map(this.extractData)
         .map(o => o.Result)
@@ -59,19 +64,16 @@ export class CRUDFactory {
         .catch(this.generalError);
     }
 
-    private extractData(res: Response) {
+    private extractData(res: Response): ICommonResponse {
         const body:ICommonResponse = res.json();
         console.log(body);
         if (body.ErrorThrown){
             switch(body.ErrorType){
                 case "MESSAGE":
-                console.log('2017 error' + body.ResponseDescription);
-                this.toastr.error('ok', 'Error');
+                this.toast.show(`I'm a toast`, '5000', 'center');
             }
-            console.log('--1--');
             throw body;
         }
-        console.log('--2--' + body);
         return body;  
     }
  

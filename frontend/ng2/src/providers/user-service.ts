@@ -10,7 +10,7 @@ export class UserServiceProvider extends CRUDFactory {
       endPoint: 'User',
       adapterIn: 1,
       adapterOut: 1
-    }, null);
+    });
     this.http = http;
   }
 

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import { HttpModule } from '@angular/http';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -9,13 +10,9 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
 //WIDGETS
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
 //SERVICES
 import { LoginService } from '../services/login.service';
-import { InterceptorService } from '../services/interceptor.service';
 
 //COMPONENTS
 import { LoginComponent } from '../components/login/login';
@@ -45,7 +42,7 @@ import { UsersPage } from '../pages/users/users';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    ToastModule.forRoot()
+    CommonModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -58,10 +55,7 @@ import { UsersPage } from '../pages/users/users';
     UserFormComponent
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
     LoginService,
-    InterceptorService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirstServiceProvider,
     UserServiceProvider,

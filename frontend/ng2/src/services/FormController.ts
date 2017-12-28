@@ -6,48 +6,40 @@ interface IConfigFormController {
 	service: CRUDFactory;
 }
 
-export abstract class FormController{
+export abstract class FormController {
 
-	protected baseEntity: IEntity = {id: 0, editMode: false};
-	
+	protected baseEntity: IEntity = { id: 0, editMode: false };
+
 	constructor(private config: IConfigFormController) {
-		
+
 	}
 
-	
+
 	//Start Form Methods
 	remove() {
-		this.config.service.remove()
-			.subscribe(this.afterRemove);
+		this.config.service.remove().subscribe(this.afterRemove);
 	}
 
 	createInstance() {
-		return this.config.service.createInstance()
-			.subscribe(oInstance => {
-					//TODO: clone
-					this.baseEntity = oInstance;
-					this.afterCreate();
-				});
-			
+		return this.config.service.createInstance().subscribe(oInstance => {
+			this.baseEntity = oInstance;
+			this.afterCreate();
+		});
+
 	}
 
 	save() {
-		console.log('form controller.ts save method');
-		console.log(this.baseEntity);
-		console.log(this.baseEntity.editMode);
-		if(this.baseEntity.editMode) {
-			return this.config.service.save(this.baseEntity)
-				.subscribe(oEntity => {
-						this.baseEntity = oEntity;
-						this.afterSave();
-					});
+		if (this.baseEntity.editMode) {
+			return this.config.service.save(this.baseEntity).subscribe(oEntity => {
+				this.baseEntity = oEntity;
+				this.afterSave();
+			});
 		}
 
 		return Observable.empty();
 	}
 
 	undo() {
-		//Todo: retrieve copy instead of reference.
 		this.baseEntity = this.config.service.getById(this.baseEntity.id);
 	}
 
@@ -66,8 +58,7 @@ export abstract class FormController{
 						this.baseEntity = oResult.Result
 					});
 				break;
-			case oEntityOrId instanceof Object || typeof(oEntityOrId) == 'object':
-				//TODO: Clone object instead of copy reference.
+			case oEntityOrId instanceof Object || typeof (oEntityOrId) == 'object':
 				this.baseEntity = oEntityOrId;
 				this.afterLoad();
 				break;
@@ -75,9 +66,10 @@ export abstract class FormController{
 				throw 'Invalid Form Init';
 		}
 	}
+
 	//End Form Methods
 
-	
+
 
 	//Start Form Events
 	on_input_change() {

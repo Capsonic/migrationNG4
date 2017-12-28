@@ -14,16 +14,18 @@ import { LoginComponent } from '../components/login/login';
   templateUrl: 'app.html',
   providers: [
     HttpModule
-  ]
+  ],
+  styleUrls: ['/toastr.scss']
 })
-
 export class MyApp {
   LoggedUser: string;
   @ViewChild(Nav) nav: Nav;
   rootPage: any = HomePage;
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public modal: ModalController,public actionsheetCtrl: ActionSheetController ) {
+  constructor(public platform: Platform,
+              public modal: ModalController,
+              public actionsheetCtrl: ActionSheetController ) {
     this.initializeApp();
     
     this.pages = [

@@ -10,7 +10,7 @@ export class SecondServiceProvider extends CRUDFactory {
       endPoint: 'Second',
       adapterIn: 1,
       adapterOut: 1
-    },null);
+    });
     this.http = http;
   }
 
