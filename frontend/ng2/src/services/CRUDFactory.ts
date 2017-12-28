@@ -4,15 +4,14 @@ import { IConfig } from './IConfig';
 import { ICommonResponse } from './ICommonResponse';
 import { Config } from '../app/config';
 import { IEntity } from './IEntity';
-import { ToastController } from 'ionic-angular';
-import { Injector, ReflectiveInjector } from '@angular/core';
-import { Toast } from '@ionic-native/toast';
+
+declare var alertify: any;
 
 export abstract class CRUDFactory {
     baseUrl: string = Config.API_URL;
     http: Http;
     cache: any[];
-    private toast: Toast;
+
     constructor(private config: IConfig
     ) {
         // let injector = ReflectiveInjector.resolveAndCreate([ToastController]);
@@ -28,7 +27,7 @@ export abstract class CRUDFactory {
         return options
     }
 
-    loadEntities(params?){  
+    loadEntities(params?){
         const result = this.http.get(this.baseUrl + this.config.endPoint, this.addAuthorization())
         .map(this.extractData)
         .catch(this.generalError);
@@ -43,7 +42,6 @@ export abstract class CRUDFactory {
     }
 
     createEntity(object){
-        let self = this;
         return this.http.post(this.baseUrl +  this.config.endPoint,  '=' + encodeURIComponent( JSON.stringify(object)) , this.addAuthorization())
         .map(this.extractData)
         .map(o => o.Result)
@@ -70,7 +68,7 @@ export abstract class CRUDFactory {
         if (body.ErrorThrown){
             switch(body.ErrorType){
                 case "MESSAGE":
-                this.toast.show(`I'm a toast`, '5000', 'center');
+                console.log(body.ResponseDescription);
             }
             throw body;
         }
