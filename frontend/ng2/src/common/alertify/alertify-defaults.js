@@ -32,7 +32,7 @@ alertify.defaults = {
   // language resources 
   glossary: {
     // dialogs default title
-    title: 'AlertifyJS',
+    title: 'NG 2',
     // ok button text
     ok: 'OK',
     // cancel button text
