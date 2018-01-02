@@ -12,22 +12,22 @@ import { LoginComponent } from '../components/login/login';
 
 @Component({
   templateUrl: 'app.html',
-  providers: [
-    HttpModule
-  ],
+  providers: [HttpModule],
   styleUrls: ['/toastr.scss']
 })
+
 export class MyApp {
+
   LoggedUser: string;
   @ViewChild(Nav) nav: Nav;
   rootPage: any = HomePage;
   pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform,
-              public modal: ModalController,
-              public actionsheetCtrl: ActionSheetController ) {
+    public modal: ModalController,
+    public actionsheetCtrl: ActionSheetController) {
     this.initializeApp();
-    
+
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Users', component: UsersPage }
@@ -36,7 +36,7 @@ export class MyApp {
 
   initializeApp() {
     if (!localStorage.getItem('access_token')) {
-      console.log('si esta vacio' +  this.LoggedUser);
+      console.log('si esta vacio' + this.LoggedUser);
       let profileModal = this.modal.create(LoginComponent, null, { enableBackdropDismiss: true });
       profileModal.dismiss(false);
       profileModal.present();
@@ -51,34 +51,34 @@ export class MyApp {
   openUserList() {
     this.nav.push(UsersPage);
   }
-  
-  openMenu(){
-      let actionSheet = this.actionsheetCtrl.create({
-        title: 'Administrator',
-        cssClass: 'action-sheets-basic-page',
-        buttons: [
-          {
-            text: 'Profile', icon: !this.platform.is('ios') ? 'share' : null, handler: () => {
-              console.log('profile clicked')
-            }
-          },
-          {
-            text: 'Logout', icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
-            handler: () => {
-              localStorage.clear();
-              let profileModal = this.modal.create(LoginComponent, null, { showBackdrop: true, enableBackdropDismiss: false });
-              profileModal.present();
-            }
-          },
-          {
-            text: 'Cancel',role: 'cancel', icon: !this.platform.is('ios') ? 'close' : null,
-            handler: () => { console.log('Cancel clicked');  }
-          }
-        ]
-      });
-      actionSheet.present();
-    }
 
-  
+  openMenu() {
+    let actionSheet = this.actionsheetCtrl.create({
+      title: 'Administrator',
+      cssClass: 'action-sheets-basic-page',
+      buttons: [
+        {
+          text: 'Profile', icon: !this.platform.is('ios') ? 'share' : null, handler: () => {
+            console.log('profile clicked')
+          }
+        },
+        {
+          text: 'Logout', icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
+          handler: () => {
+            localStorage.clear();
+            let profileModal = this.modal.create(LoginComponent, null, { showBackdrop: true, enableBackdropDismiss: false });
+            profileModal.present();
+          }
+        },
+        {
+          text: 'Cancel', role: 'cancel', icon: !this.platform.is('ios') ? 'close' : null,
+          handler: () => { console.log('Cancel clicked'); }
+        }
+      ]
+    });
+    actionSheet.present();
   }
+
+
+}
 

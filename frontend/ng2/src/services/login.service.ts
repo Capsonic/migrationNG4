@@ -3,13 +3,11 @@ import { Observable } from 'rxjs/RX';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Config } from '../app/config';
 
-
 @Injectable()
 export class LoginService {
     url = Config.API_URL;
 
     constructor(private http: Http) {
-
     }
 
     getToken(body): Observable<any> {
@@ -20,7 +18,6 @@ export class LoginService {
             .catch(this.handleError);
         return result;
     }
-
 
     private extractData(res: Response) {
         const body = res.json();

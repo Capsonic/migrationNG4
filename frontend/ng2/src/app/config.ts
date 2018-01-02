@@ -1,6 +1,6 @@
 export const Config = {
-    title: 'Hello World',
+    title: 'Capsonic',
     // 'API_URL': 'http://localhost:57063/api/',
     'API_URL': 'http://apps.capsonic.com/test/api/',
-    'APP_NAME': 'Ng 1'
+    'APP_NAME': 'Ng 2'
   };

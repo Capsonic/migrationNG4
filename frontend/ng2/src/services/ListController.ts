@@ -6,17 +6,14 @@ interface IConfigListController {
 	service: CRUDFactory;
 }
 
-export abstract class ListController{
+export abstract class ListController {
 
 	protected baseEntity: IEntity = {id: 0, editMode: false};
 	
-	constructor(private config: IConfigListController) {
-		
+	constructor(private config: IConfigListController) {		
 	}
 
-	
     //Start List Methods
-    
 	removeItem(){
     }
 
@@ -73,12 +70,10 @@ export abstract class ListController{
 
     clearFilters(){
     }
-
 	//End List Methods
 
-	
 
-	//Start List Events
+    //Start List Events
 	on_input_change() {
 		this.baseEntity.editMode = true;
 	}
@@ -94,7 +89,4 @@ export abstract class ListController{
 
 	abstract afterCreate();
 	//End Hooks
-
-
-
 }

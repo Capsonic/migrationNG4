@@ -4,14 +4,16 @@ import { IConfig } from './IConfig';
 import { ICommonResponse } from './ICommonResponse';
 import { Config } from '../app/config';
 import { IEntity } from './IEntity';
+import alertify from 'alertifyjs';
+
 
 export abstract class CRUDFactory {
     baseUrl: string = Config.API_URL;
     http: Http;
     cache: any[];
 
-    constructor(private config: IConfig
-    ) {  }
+    constructor(private config: IConfig) {
+    }
 
     addAuthorization() {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -27,7 +29,6 @@ export abstract class CRUDFactory {
             .map(this.extractData)
             .catch(this.generalError);
         return result;
-
     }
 
     loadEntity(id, params?) {

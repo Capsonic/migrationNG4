@@ -14,10 +14,6 @@ export class LoginComponent {
   constructor(public nav: NavController, private loginService: LoginService) {
   }
 
-  // login(formValues){
-  //   this.nav.pop();
-  // }
-
   login(formValues) {
     if (!formValues.userName || !formValues.password) {
       this.errorMessage = 'Username or Password fields are missing';

@@ -38,12 +38,14 @@ import { UsersPage } from '../pages/users/users';
     UsersComponent,
     UserFormComponent
   ],
+
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
     CommonModule,
   ],
+
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -54,6 +56,7 @@ import { UsersPage } from '../pages/users/users';
     UsersComponent,
     UserFormComponent
   ],
+  
   providers: [
     LoginService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

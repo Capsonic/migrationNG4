@@ -28,12 +28,14 @@ export class HomePage {
   ) { }
 
   userList() {
+    console.log('SI SE USA USERLIST');
     this.userSerivceProvider.loadEntities().subscribe(results => {
       this.users = results.Result;
     });
   }
 
   getUser(){
+    console.log('SI SE USA GETUSER');
     this.userSerivceProvider.loadEntity(1).subscribe(results => {
       this.user = results.Result;
       // console.log('userService.loadEntity | '+ JSON.stringify(results));

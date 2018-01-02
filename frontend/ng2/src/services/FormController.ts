@@ -11,7 +11,6 @@ export abstract class FormController {
 	protected baseEntity: IEntity = { id: 0, editMode: false };
 
 	constructor(private config: IConfigFormController) {
-
 	}
 
 
@@ -25,7 +24,6 @@ export abstract class FormController {
 			this.baseEntity = oInstance;
 			this.afterCreate();
 		});
-
 	}
 
 	save() {
@@ -35,7 +33,6 @@ export abstract class FormController {
 				this.afterSave();
 			});
 		}
-
 		return Observable.empty();
 	}
 
@@ -66,9 +63,7 @@ export abstract class FormController {
 				throw 'Invalid Form Init';
 		}
 	}
-
 	//End Form Methods
-
 
 
 	//Start Form Events
@@ -87,7 +82,4 @@ export abstract class FormController {
 
 	abstract afterRemove();
 	//End Hooks
-
-
-
 }

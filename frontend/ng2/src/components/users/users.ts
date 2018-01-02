@@ -7,6 +7,7 @@ import { UserFormComponent } from '../user-form/user-form';
   selector: 'users-component',
   templateUrl: 'users.html'
 })
+
 export class UsersComponent {
   users: string[];
   text: string;
@@ -17,13 +18,13 @@ export class UsersComponent {
     });
   }
 
-  addUser(){
+  addUser() {
     let profileModal = this.modal.create(UserFormComponent, {oEntityOrId: null});
     profileModal.dismiss(false);
     profileModal.present();
   }
 
-  deleteUser(user){
+  deleteUser(user) {
     this.userServiceProvider.removeSelected(user, user.UserKey).subscribe(results => {
       // this.users = results.Result;
       console.log('Eliminado correctamente');
