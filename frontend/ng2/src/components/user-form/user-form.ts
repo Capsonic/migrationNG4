@@ -12,9 +12,7 @@ export class UserFormComponent extends FormController implements OnInit {
   errorMessage: string;
 
   constructor(public userSerivceProvider: UserServiceProvider, private params: NavParams, private nav: NavController) {
-    super({
-      service: userSerivceProvider
-    });
+    super({ service: userSerivceProvider });
   }
 
   ngOnInit() {
@@ -26,6 +24,7 @@ export class UserFormComponent extends FormController implements OnInit {
   }
 
   afterCreate() {
+    this.load(this.params.get('oEntityOrId'));
   }
 
   afterLoad() {

@@ -21,31 +21,22 @@ alertify.defaults = {
 
   // notifier defaults
   notifier: {
-    // auto-dismiss wait time (in seconds)  
-    delay: 5,
-    // default position
-    position: 'bottom-right',
-    // adds a close button to notifier messages
+    delay: 50,
+    position: 'bottom-left',
     closeButton: false
   },
 
   // language resources 
   glossary: {
-    // dialogs default title
     title: 'NG 2',
-    // ok button text
     ok: 'OK',
-    // cancel button text
     cancel: 'Cancel'
   },
 
   // theme settings
   theme: {
-    // class name attached to prompt dialog input textbox.
     input: 'ajs-input',
-    // class name attached to ok button
     ok: 'ajs-ok',
-    // class name attached to cancel button 
     cancel: 'ajs-cancel'
   }
 };

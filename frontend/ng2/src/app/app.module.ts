@@ -7,7 +7,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 //APPS
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 
 //WIDGETS
 
@@ -16,7 +15,8 @@ import { LoginService } from '../services/login.service';
 
 //COMPONENTS
 import { LoginComponent } from '../components/login/login';
-import { UsersComponent } from '../components/users/users';
+import { UsersComponent } from '../components/users/users-component';
+import { FooterComponent } from '../components/footer/footer-component';
 
 //PROVIDERS
 import { FirstServiceProvider } from '../providers/first-service';
@@ -29,14 +29,14 @@ import { UsersPage } from '../pages/users/users';
 @NgModule({
   declarations: [
     MyApp,
-    //Pages
+    //PAGES
     HomePage,
-    ListPage,
     UsersPage,
-    //Components
+    //COMPONENTS
     LoginComponent,
     UsersComponent,
-    UserFormComponent
+    UserFormComponent,
+    FooterComponent
   ],
 
   imports: [
@@ -49,17 +49,19 @@ import { UsersPage } from '../pages/users/users';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    //PAGES
     HomePage,
-    ListPage,
     UsersPage,
+    //COMPONENTS
     LoginComponent,
     UsersComponent,
-    UserFormComponent
+    UserFormComponent,
+    FooterComponent
   ],
   
   providers: [
     LoginService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     FirstServiceProvider,
     UserServiceProvider,
     SecondServiceProvider

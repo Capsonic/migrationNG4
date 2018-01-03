@@ -22,7 +22,6 @@ export abstract class FormController {
 	createInstance() {
 		return this.config.service.createInstance().subscribe(oInstance => {
 			this.baseEntity = oInstance;
-			this.afterCreate();
 		});
 	}
 
@@ -41,21 +40,25 @@ export abstract class FormController {
 	}
 
 	load(oEntityOrID: any) {
+		console.log('FormController > load');
 		this.refresh(oEntityOrID);
 	}
 
 	refresh(oEntityOrId: any) {
 		switch (true) {
-			case !oEntityOrId:
+			case !oEntityOrId:				
+				console.log('FormController > refresh case !oEntityOrId');
 				this.createInstance();
 				break;
 			case oEntityOrId > 0:
+				console.log('FormController > refresh case oEntityOrId > 0');
 				this.config.service.loadEntity(oEntityOrId)
 					.subscribe(oResult => {
 						this.baseEntity = oResult.Result
 					});
 				break;
 			case oEntityOrId instanceof Object || typeof (oEntityOrId) == 'object':
+				console.log('FormController > refresh case 3');
 				this.baseEntity = oEntityOrId;
 				this.afterLoad();
 				break;
@@ -71,7 +74,6 @@ export abstract class FormController {
 		this.baseEntity.editMode = true;
 	}
 	//End Form Events
-
 
 	//Start Hooks
 	abstract afterLoad();

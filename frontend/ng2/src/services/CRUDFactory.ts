@@ -45,7 +45,6 @@ export abstract class CRUDFactory {
     }
 
     removeSelected(object, userId) {
-        console.log('entra a crud factory removeSelected |' + this.baseUrl + this.config.endPoint + "/" + userId);
         return this.http.delete(this.baseUrl + this.config.endPoint + "/" + userId, this.addAuthorization())
             .map(this.extractData)
             .catch(this.generalError);
@@ -74,13 +73,11 @@ export abstract class CRUDFactory {
             switch (error.ErrorType) {
                 case "MESSAGE":
                     alertify.alert(error.ResponseDescription);
-                    console.log(error.ResponseDescription);
             }
             return Observable.empty();
         } else {
             switch (error.status) {
                 case 401:
-                    console.log('Redireccionar a login');
                     return Observable.empty();
             }
         }

@@ -9,8 +9,9 @@
             <label class="lbl-main">NG 2 app</label>
           </div>
           <div class="buttons-div">
-            <button (click)="openUserList()">Catalogs</button>
-            <button (click)="openMenu()">&nbsp;{{ LoggedUser | uppercase }}</button>
+            <button (click)="openHome()"><ion-icon name="ios-home"></ion-icon> HOME</button>
+            <button (click)="openUserList()"><ion-icon name="ios-book"></ion-icon> CATALOGS</button>
+            <button (click)="openMenu()"><ion-icon name="ios-contact"></ion-icon> {{ LoggedUser | uppercase }}</button>
           </div>
         </div>
       </ion-title>
@@ -21,7 +22,7 @@
 
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu</ion-title>
+      <ion-title>menu</ion-title>
     </ion-toolbar>
   </ion-header>
   

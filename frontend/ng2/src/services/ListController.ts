@@ -1,92 +1,103 @@
 import { CRUDFactory } from './CRUDFactory';
 import { IEntity } from './IEntity';
-import { Observable } from 'rxjs/RX';
+import alertify from 'alertifyjs';
 
 interface IConfigListController {
-	service: CRUDFactory;
+    service: CRUDFactory;
 }
 
 export abstract class ListController {
 
-	protected baseEntity: IEntity = {id: 0, editMode: false};
-	
-	constructor(private config: IConfigListController) {		
-	}
+    protected baseList: Array<IEntity>;
+
+    constructor(private config: IConfigListController) {
+    }
 
     //Start List Methods
-	removeItem(){
-    }
+    createInstance(){
 
-    openItem(){
-    }
-
-    checkItem(){
-    }
-
-    removeSelected(){
-    }
-
-    pageChanged(){
-    }
-
-    saveItem(){
-    }
-
-    save(){
-    }
-
-    undoItem(){
-    }
-
-    refresh(){
-    }
-
-    getSelectedCount(){
-    }
-
-    unSelectAll(){
-    }
-
-    selectAll(){
-    }
-
-    getSelected(){
     }
     
-    setFilterOptions(){
+    removeItem(user) {
+        // this.config.service.removeSelected(user, user.UserKey).subscribe(results => {            
+            alertify.success('User succesfully removed');
+            this.afterRemove();
+        // });
     }
 
-    persistFilter(){
-    }
-    
-    load(){
-    }
-    
-    makeQueryParameters(){
-    }
-    
-    updateList(){
+    openItem() {
     }
 
-    clearFilters(){
+    checkItem() {
     }
-	//End List Methods
+
+    removeSelected() {
+    }
+
+    pageChanged() {
+    }
+
+    saveItem() {
+    }
+
+    save() {
+    }
+
+    undoItem() {
+    }
+
+    refresh() {
+    }
+
+    getSelectedCount() {
+    }
+
+    unSelectAll() {
+    }
+
+    selectAll() {
+    }
+
+    getSelected() {
+    }
+
+    setFilterOptions() {
+    }
+
+    persistFilter() {
+    }
+
+    load() {
+        this.config.service.loadEntities().subscribe(oResult => {
+            this.baseList = oResult.Result;
+        });
+    }
+
+    makeQueryParameters() {
+    }
+
+    updateList() {
+    }
+
+    clearFilters() {
+    }
+    //End List Methods
 
 
     //Start List Events
-	on_input_change() {
-		this.baseEntity.editMode = true;
-	}
-	//End List Events
+    on_input_change(oItem: IEntity) {
+        oItem.editMode = true;
+    }
+    //End List Events
 
 
-	//Start Hooks
-	abstract afterLoad();
+    //Start Hooks
+    abstract afterLoad();
 
-	abstract onOpenItem();
+    abstract onOpenItem();
 
-	abstract afterRemove();
+    abstract afterRemove();
 
-	abstract afterCreate();
-	//End Hooks
+    abstract afterCreate();
+    //End Hooks
 }

@@ -12,8 +12,7 @@ import { LoginComponent } from '../components/login/login';
 
 @Component({
   templateUrl: 'app.html',
-  providers: [HttpModule],
-  styleUrls: ['/toastr.scss']
+  providers: [HttpModule]
 })
 
 export class MyApp {
@@ -23,9 +22,11 @@ export class MyApp {
   rootPage: any = HomePage;
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform,
+  constructor(
+    public platform: Platform,
     public modal: ModalController,
-    public actionsheetCtrl: ActionSheetController) {
+    public actionsheetCtrl: ActionSheetController
+  ) {
     this.initializeApp();
 
     this.pages = [
@@ -36,16 +37,20 @@ export class MyApp {
 
   initializeApp() {
     if (!localStorage.getItem('access_token')) {
-      console.log('si esta vacio' + this.LoggedUser);
       let profileModal = this.modal.create(LoginComponent, null, { enableBackdropDismiss: true });
       profileModal.dismiss(false);
       profileModal.present();
+      this.LoggedUser = localStorage.getItem('userName');
     }
     this.LoggedUser = localStorage.getItem('userName');
   }
 
   openPage(page) {
     this.nav.setRoot(page.component);
+  }
+
+  openHome(){
+    this.nav.popToRoot();
   }
 
   openUserList() {
