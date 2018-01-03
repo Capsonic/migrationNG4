@@ -1,0 +1,33 @@
+☐ formController.
+        Methods:
+            ☐ Accept in constructor a settings object.
+                ☐ service (CRUDFactory instance)
+            ☐ remove(oEntity).
+                ☐ service.remove().
+                ☐ afterRemove().
+            ☐ createInstance().
+                ☐ service.createInstance().
+                ☐ afterCreate().
+            ☐ on_input_change().
+                ☐ baseEntity.editMode = true
+            ☐ save().
+                ☐ if baseEntity.editMode then service.save().
+            ☐ undo().
+                ☐ copy original entity from service cache to current form.
+            ☐ load(oEntityOrID).
+                ☐ refresh(oEntityOrID).
+            ☐ refresh(oEntityOrID).
+                ☐ case oEntityOrID = null/''/undefined
+                    ☐ createInstance()
+                    ☐ afterCreate()
+                ☐ case oEntityOrID > 0:
+                    ☐ service.loadEntity()
+                    ☐ afterLoad()
+                ☐ case oEntityOrID is an object: 
+                    ☐ baseEntity = oEntityOrID
+                    ☐ afterLoad()
+        Hooks:
+            ☐ afterLoad().
+            ☐ afterCreate().
+            ☐ afterRemove().
+            ☐ afterSave().

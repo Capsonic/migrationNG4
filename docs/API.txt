@@ -49,7 +49,7 @@
 |        |                                                                                     |
 |        | Expects body with Entity formatted as JSON.                                         |
 |--------|-------------------------------------------------------------------------------------|
-| PUT    | http://localhost:57063/api/{entity}/id                                              |
+| PUT    | http://localhost:57063/api/{entity}/{id}                                            |
 |        |                                                                                     |
 |        | Updates an Entity by id.                                                            |
 |        |                                                                                     |
@@ -69,6 +69,7 @@
 
 All responses (except for Ping) are CommonResponse objects JSONs:
 
+==============================================================
 | CommonResponse Properties |          Description           |
 |===========================|================================|
 | ErrorThrown               | Indicates if error was thrown. |
@@ -76,3 +77,4 @@ All responses (except for Ping) are CommonResponse objects JSONs:
 | Result                    | The requested resource.        |
 | AdditionalData            | Any additional data.           |
 | ErrorType                 | MESSAGE or INCIDENT            |
+|===========================|================================|
