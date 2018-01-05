@@ -5,7 +5,7 @@ import { ModalController } from 'ionic-angular';
 
 //PAGES
 import { HomePage } from '../pages/home/home';
-import { UsersPage } from '../pages/users/users';
+import { UsersPage } from '../pages/users/users-page';
 
 //COMPONENTS
 import { LoginComponent } from '../components/login/login';

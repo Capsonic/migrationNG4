@@ -24,6 +24,24 @@ export abstract class CRUDFactory {
         return options
     }
 
+    createEntity(object) {
+        return this.http.post(this.baseUrl + this.config.endPoint, '=' + encodeURIComponent(JSON.stringify(object)), this.addAuthorization())
+            .map(this.extractData)
+            .map(o => o.Result)
+            .catch(this.generalError);
+    }
+
+    createInstance() {
+        return this.http.post(this.baseUrl + this.config.endPoint + '/create', null, this.addAuthorization())
+            .map(this.extractData)
+            .map(d => d.Result)
+            .catch(this.generalError);
+    }
+
+    getById(id: number): IEntity {
+        return null;
+    }
+
     loadEntities(params?) {
         const result = this.http.get(this.baseUrl + this.config.endPoint, this.addAuthorization())
             .map(this.extractData)
@@ -36,24 +54,29 @@ export abstract class CRUDFactory {
             .map(this.extractData)
             .catch(this.generalError);
     }
-
-    createEntity(object) {
-        return this.http.post(this.baseUrl + this.config.endPoint, '=' + encodeURIComponent(JSON.stringify(object)), this.addAuthorization())
-            .map(this.extractData)
-            .map(o => o.Result)
-            .catch(this.generalError);
+    
+    remove(): Observable<any> {
+        return Observable.empty();
+    }
+    
+    save(oEntity): Observable<any> {
+        if (oEntity.id > 0) {
+            return this.updateEntity(oEntity);
+        } else {
+            return this.createEntity(oEntity);
+        }
     }
 
-    removeSelected(object, userId) {
+    removeEntity(object, userId) {
         return this.http.delete(this.baseUrl + this.config.endPoint + "/" + userId, this.addAuthorization())
             .map(this.extractData)
             .catch(this.generalError);
     }
 
-    createInstance() {
-        return this.http.post(this.baseUrl + this.config.endPoint + '/create', null, this.addAuthorization())
-            .map(this.extractData)
-            .map(d => d.Result)
+    updateEntity(object) {
+        return this.http.put(this.baseUrl + this.config.endPoint + '/' + object.id, '=' + encodeURIComponent(JSON.stringify(object)), this.addAuthorization())
+            .map(this.extractData)  
+            .map(o => o.Result)
             .catch(this.generalError);
     }
 
@@ -65,7 +88,6 @@ export abstract class CRUDFactory {
         }
         return body;
     }
-
 
     private generalError(error: any) {
         console.log('STATUS |' + error.status);
@@ -83,16 +105,6 @@ export abstract class CRUDFactory {
         }
         return Observable.throw(error.statusText);
     }
-
-    save(oEntity): Observable<any> {
-        return this.createEntity(oEntity);
-    }
-
-    remove(): Observable<any> {
-        return Observable.empty();
-    }
-
-    getById(id: number): IEntity {
-        return null;
-    }
 }
+
+// 56360140

@@ -18,7 +18,9 @@ users {
 }
 
 .single-user:hover{
-    background-color: #e4e4e4
+    background-color: #e4e4e4;
+    -webkit-transition: width 2s; /* Safari */
+    transition:all 0.8s ease;
 }
 
 .single-user > div {

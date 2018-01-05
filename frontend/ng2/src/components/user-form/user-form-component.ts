@@ -4,8 +4,8 @@ import { FormController } from '../../services/FormController';
 import { NavParams, NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'user-form',
-  templateUrl: 'user-form.html'
+  selector: 'user-form-component',
+  templateUrl: 'user-form-component.html'
 })
 
 export class UserFormComponent extends FormController implements OnInit { 
@@ -24,7 +24,6 @@ export class UserFormComponent extends FormController implements OnInit {
   }
 
   afterCreate() {
-    this.load(this.params.get('oEntityOrId'));
   }
 
   afterLoad() {
@@ -32,7 +31,6 @@ export class UserFormComponent extends FormController implements OnInit {
 
   afterSave(){
     this.nav.pop();
-    this.load(this.params.get('oEntityOrId'));
   }
 
   afterRemove() {

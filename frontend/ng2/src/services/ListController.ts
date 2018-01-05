@@ -1,6 +1,8 @@
 import { CRUDFactory } from './CRUDFactory';
 import { IEntity } from './IEntity';
 import alertify from 'alertifyjs';
+import { ModalController } from 'ionic-angular';
+import { UserFormComponent } from '../components/user-form/user-form-component';
 
 interface IConfigListController {
     service: CRUDFactory;
@@ -10,61 +12,23 @@ export abstract class ListController {
 
     protected baseList: Array<IEntity>;
 
-    constructor(private config: IConfigListController) {
+    constructor(public config: IConfigListController, public modal: ModalController) {
     }
 
     //Start List Methods
-    createInstance(){
-
-    }
-    
-    removeItem(user) {
-        // this.config.service.removeSelected(user, user.UserKey).subscribe(results => {            
-            alertify.success('User succesfully removed');
-            this.afterRemove();
-        // });
-    }
-
-    openItem() {
+    clearFilters() {
     }
 
     checkItem() {
     }
 
-    removeSelected() {
-    }
-
-    pageChanged() {
-    }
-
-    saveItem() {
-    }
-
-    save() {
-    }
-
-    undoItem() {
-    }
-
-    refresh() {
-    }
-
-    getSelectedCount() {
-    }
-
-    unSelectAll() {
-    }
-
-    selectAll() {
+    createInstance() {
     }
 
     getSelected() {
     }
 
-    setFilterOptions() {
-    }
-
-    persistFilter() {
+    getSelectedCount() {
     }
 
     load() {
@@ -76,10 +40,63 @@ export abstract class ListController {
     makeQueryParameters() {
     }
 
+    openItem(user) {
+        let profileModal = this.modal.create(UserFormComponent, { oEntityOrId: user.id });
+        profileModal.dismiss(false);
+        profileModal.present();
+
+        profileModal.onDidDismiss(data => {
+            this.load();
+        });
+    }
+
+    pageChanged() {
+    }
+
+    persistFilter() {
+    }
+
+    refresh() {
+    }
+
+    removeItem(user) {
+        let self = this;
+        alertify.confirm('Are you sure you want to delete this user ' + user.Value + ' ?',
+            function () {
+                self.config.service.removeEntity(user, user.UserKey).subscribe(results => {
+                    alertify.success('User succesfully deleted');
+                    self.afterRemove();
+                }
+                );
+            },
+            function () {
+                alertify.error('Cancel');
+            });
+
+    }
+
+    removeSelected() {
+    }
+
+    selectAll() {
+    }
+
+    setFilterOptions() {
+    }
+
+    saveItem() {
+    }
+
+    save() {
+    }
+
+    undoItem() {
+    }
+
     updateList() {
     }
 
-    clearFilters() {
+    unSelectAll() {
     }
     //End List Methods
 

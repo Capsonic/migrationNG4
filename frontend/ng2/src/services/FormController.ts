@@ -15,14 +15,39 @@ export abstract class FormController {
 
 
 	//Start Form Methods
-	remove() {
-		this.config.service.remove().subscribe(this.afterRemove);
-	}
-
 	createInstance() {
 		return this.config.service.createInstance().subscribe(oInstance => {
 			this.baseEntity = oInstance;
+			this.afterCreate();
 		});
+	}
+
+	load(oEntityOrID: any) {
+		this.refresh(oEntityOrID);
+	}
+
+	refresh(oEntityOrId: any) {
+		switch (true) {
+			case !oEntityOrId:				
+				this.createInstance();
+				break;
+			case oEntityOrId > 0:
+				this.config.service.loadEntity(oEntityOrId)
+					.subscribe(oResult => {
+						this.baseEntity = oResult.Result
+					});
+				break;
+			case oEntityOrId instanceof Object || typeof (oEntityOrId) == 'object':				
+				this.baseEntity = oEntityOrId;
+				this.afterLoad();
+				break;
+			default:
+				throw 'Invalid Form Init';
+		}
+	}
+
+	remove() {
+		this.config.service.remove().subscribe(this.afterRemove);
 	}
 
 	save() {
@@ -37,34 +62,6 @@ export abstract class FormController {
 
 	undo() {
 		this.baseEntity = this.config.service.getById(this.baseEntity.id);
-	}
-
-	load(oEntityOrID: any) {
-		console.log('FormController > load');
-		this.refresh(oEntityOrID);
-	}
-
-	refresh(oEntityOrId: any) {
-		switch (true) {
-			case !oEntityOrId:				
-				console.log('FormController > refresh case !oEntityOrId');
-				this.createInstance();
-				break;
-			case oEntityOrId > 0:
-				console.log('FormController > refresh case oEntityOrId > 0');
-				this.config.service.loadEntity(oEntityOrId)
-					.subscribe(oResult => {
-						this.baseEntity = oResult.Result
-					});
-				break;
-			case oEntityOrId instanceof Object || typeof (oEntityOrId) == 'object':
-				console.log('FormController > refresh case 3');
-				this.baseEntity = oEntityOrId;
-				this.afterLoad();
-				break;
-			default:
-				throw 'Invalid Form Init';
-		}
 	}
 	//End Form Methods
 

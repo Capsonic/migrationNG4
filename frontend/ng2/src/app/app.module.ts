@@ -22,8 +22,8 @@ import { FooterComponent } from '../components/footer/footer-component';
 import { FirstServiceProvider } from '../providers/first-service';
 import { UserServiceProvider } from '../providers/user-service';
 import { SecondServiceProvider } from '../providers/second-service';
-import { UserFormComponent } from '../components/user-form/user-form';
-import { UsersPage } from '../pages/users/users';
+import { UserFormComponent } from '../components/user-form/user-form-component';
+import { UsersPage } from '../pages/users/users-page';
 
 
 @NgModule({
