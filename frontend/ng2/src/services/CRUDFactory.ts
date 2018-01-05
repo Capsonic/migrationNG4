@@ -6,11 +6,9 @@ import { Config } from '../app/config';
 import { IEntity } from './IEntity';
 import alertify from 'alertifyjs';
 
-
 export abstract class CRUDFactory {
     baseUrl: string = Config.API_URL;
     http: Http;
-    cache: any[];
 
     constructor(private config: IConfig) {
     }
