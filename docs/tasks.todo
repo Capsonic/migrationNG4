@@ -1,31 +1,41 @@
 Frontend Migration from Angualr 1 to Angular 4:
   Services:
-    ☐ AppConfig.
-        ☐ A shared service to store the base URL and app name.
+    ✔ AppConfig. @done (18-01-05 11:10)
+        ✔ A shared service to store the base URL and app name. @done (18-01-05 11:10)
     ☐ localStorage.
         ☐ To do some research to find the best component for angular 4.
     ☐ AuthService.
         ☐ Login.
-            ☐ Post to api/token.
-            ☐ Store token on local storage.
+            ✔ Post to api/token. @done (18-01-05 11:29)
+            ✔ Store token on local storage. @done (18-01-05 11:29)
             ☐ Retrieve user's role from backend.
-        ☐ Logout.
-            ☐ Remove info from local storage.
-            ☐ Open login popup.
+                -Update: Instead, just store role that will be included on response to api/token.
+        ✔ Logout. @done (18-01-05 11:49)
+            ✔ Remove info from local storage. @done (18-01-05 11:49)
+            ✔ Open login popup. @done (18-01-05 11:49)
         ☐ AuthInterceptor.
-            ☐ Intercept all requests and add header with token.
+            ✔ Intercept all requests and add header with token. @done (18-01-05 11:50)
+                -Update: can be done on CRUD Factory.
             ☐ Intercepl all responses and for 401 error logout.
+                ☐ Logic for Known Exceptions.
+                ☐ Logic for 401 (session expired) => open login popup.
+                -Update: can be done on CRUD Factory.
             
     ☐ CRUDFactory.
+        ☐ 
       To Refactor from Angular 1.x:
-        ☐ Function for handling all response errors.
-        ☐ Known Exceptions show message instead of stack trace.
+        ✔ Function for handling all response errors. @done (18-01-05 11:51)
+        ✔ Known Exceptions show message instead of stack trace. @done (18-01-05 11:51)
         ☐ Show Stack Trace under a Technical Details button.
-        ☐ Decouple Alertify and ActivityIndicator.
-        ☐ Not always trigger alertify.
+        ✔ Decouple Alertify and ActivityIndicator. @done (18-01-05 11:54)
+            -Update: We don't need Alertify and ActivityIndicator at all on CRUD Factory.
+               -Except for generalError function.
+        ✔ Not always trigger alertify. @done (18-01-05 11:54)
         ☐ Validation Results Popup.
         ☐ Response object: Result, Message, ErrorsList, ValidationsList, AdditionalData
+            TODO Alfredo: Complete backend CommonResponse.
         ☐ Common Error Types: Modal, Message, Alert, Incident.
+            TODO Alfredo: Complete backend error responses.
     -------------------------------------
     ☐ RFactory.
     ☐ HotKeys.
@@ -35,56 +45,66 @@ Frontend Migration from Angualr 1 to Angular 4:
   Controllers:
     ☐ formController.
         Methods:
-            ☐ Accept in constructor a settings object.
-                ☐ service (CRUDFactory instance)
-            ☐ remove(oEntity).
-                ☐ service.remove().
-                ☐ afterRemove().
-            ☐ createInstance().
-                ☐ service.createInstance().
-                ☐ afterCreate().
-            ☐ on_input_change().
-                ☐ baseEntity.editMode = true
-            ☐ save().
-                ☐ if baseEntity.editMode then service.save().
+            ✔ Accept in constructor a settings object. @done (18-01-05 11:57)
+                ✔ service (CRUDFactory instance) @done (18-01-05 11:57)
+            ✔ remove(oEntity). @done (18-01-05 11:57)
+                ✔ service.remove(). @done (18-01-05 11:57)
+                ✔ afterRemove(). @done (18-01-05 11:57)
+            ✔ createInstance(). @done (18-01-05 12:03)
+                ✔ service.createInstance(). @done (18-01-05 12:01)
+                ✔ afterCreate(). @done (18-01-05 12:03)
+            ✔ on_input_change(). @done (18-01-05 12:03)
+                ✔ baseEntity.editMode = true @done (18-01-05 12:03)
+            ✔ save(). @done (18-01-05 12:03)
+                ✔ if baseEntity.editMode then service.save(). @done (18-01-05 12:03)
+                ✔ call afterSave() @done (18-01-05 12:03)
             ☐ undo().
                 ☐ copy original entity from service cache to current form.
-            ☐ load(oEntityOrID).
-                ☐ refresh(oEntityOrID).
-            ☐ refresh(oEntityOrID).
-                ☐ case oEntityOrID = null/''/undefined
-                    ☐ createInstance()
-                    ☐ afterCreate()
-                ☐ case oEntityOrID > 0:
-                    ☐ service.loadEntity()
-                    ☐ afterLoad()
-                ☐ case oEntityOrID is an object: 
-                    ☐ baseEntity = oEntityOrID
-                    ☐ afterLoad()
+                    -Update: Pull again entity from server.
+            ✔ load(oEntityOrID). @done (18-01-05 12:24)
+                ✔ refresh(oEntityOrID). @done (18-01-05 12:12)
+                ✔ should return observeble/proimse. @done (18-01-05 12:24)
+            ✔ refresh(oEntityOrID). @done (18-01-05 12:24)
+                ✔ case oEntityOrID = null/''/undefined @done (18-01-05 12:10)
+                    ✔ createInstance() @done (18-01-05 12:10)
+                    ✔ afterCreate() @done (18-01-05 12:10)
+                ✔ case oEntityOrID > 0: @done (18-01-05 12:24)
+                    ✔ service.loadEntity() @done (18-01-05 12:11)
+                    ✔ afterLoad() @done (18-01-05 12:11)
+                ✔ case oEntityOrID is an object: @done (18-01-05 12:12)
+                    ✔ baseEntity = oEntityOrID @done (18-01-05 12:12)
+                    ✔ afterLoad() @done (18-01-05 12:12)
+                ✔ Should return observable/promse @done (18-01-05 12:24)
         Hooks:
-            ☐ afterLoad().
-            ☐ afterCreate().
-            ☐ afterRemove().
-            ☐ afterSave().
+            ✔ afterLoad(). @done (18-01-05 12:25)
+            ✔ afterCreate(). @done (18-01-05 12:25)
+            ✔ afterRemove(). @done (18-01-05 12:25)
+            ✔ afterSave(). @done (18-01-05 12:25)
 
     ☐ listController.
         Methods:
             ☐ Accept in constructor a settings object.
-                ☐ service (CRUDFactory instance).
-                ☐ paginate (enable/disable pagination).
-                ☐ perPage (how many entries per page).
-            ☐ Should handle fileStorageName per (endpoing and page)
+                ✔ service (CRUDFactory instance). @done (18-01-05 12:26)
+                ✔ paginate (enable/disable pagination). @done (18-01-05 12:28)
+                ✔ perPage (how many entries per page). @done (18-01-05 12:28)
+                    -Update: rename perPage to limit.
+                ✔ filters (object with key,values to filter at backend) @done (18-01-05 12:34)
+            ☐ Should handle filterStorageName per (endpoing and page)
                 ☐ Should store filter settings.
             ☐ removeItem(oEntity).
                 ☐ service.remove(oEntity, baseList).
-                ☐ afterRemove().
+                    -TODO: remove oEntity parameter.
+                ✔ afterRemove(). @done (18-01-05 12:50)
             ☐ openItem(oEntity)
-                ☐ onOpenItem().
+                ☐ onOpenItem()
+                    -TODO: modal code should be on component instead of here.
                 ☐ append any additional arguments found on openItem to onOpenItem call.
             ☐ checkItem
-                ☐ toggle .selected = true/false
+                ☐ add id to a local array of ids to be deleted.
+                ☐ if unchecked, then find id in this array and remove it from there.
+                TODO Alfredo: backend delete in batch.
             ☐ removeSelected()
-                ☐ remove all .selected items.
+                ☐ send ids to be removed to server.
             ☐ pageChanged(newPage)
                 ☐ filterOptions.page = newPage
                 ☐ updateList().
@@ -180,3 +200,15 @@ Frontend Migration from Angualr 1 to Angular 4:
     ☐ Search in system.
     -------------------------------------
     ☐ Recursive List.
+
+
+
+
+Test Application:
+    ☐ User Entity
+        ☐ User List
+            ☐ Create new User
+            ✔ Remove User @done (18-01-05 12:00)
+                ✔ Should refresh afterRemove @done (18-01-05 12:00)
+        ☐ User Form
+            ✔ on_input_change to all input controls @done (18-01-05 12:02)
