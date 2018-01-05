@@ -78,3 +78,26 @@ All responses (except for Ping) are CommonResponse objects JSONs:
 | AdditionalData            | Any additional data.           |
 | ErrorType                 | MESSAGE or INCIDENT            |
 |===========================|================================|
+
+
+
+
+SELECT  [Id],[UserName]
+  FROM [TestDB].[dbo].[AspNetUsers]
+
+SELECT 
+		[UserName]
+		,[UserKey]
+		,[Value]
+		,[Role]
+		,[AuthorizatorPassword]
+		,[Email]
+		,[sys_active]
+		,[is_locked]
+		,[document_status]
+		,[CreatedAt]
+  FROM [TestDB].[dbo].[User]
+  
+  
+--delete from [TestDB].[dbo].[User] where UserName = 'erick1'
+--delete from [TestDB].[dbo].[AspNetUsers] where UserName = 'erick1'
