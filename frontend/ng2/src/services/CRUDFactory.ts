@@ -29,7 +29,7 @@ export abstract class CRUDFactory {
             .catch(this.generalError);
     }
 
-    createInstance() {
+    createInstance():Observable<any> {
         return this.http.post(this.baseUrl + this.config.endPoint + '/create', null, this.addAuthorization())
             .map(this.extractData)
             .map(d => d.Result)
@@ -97,6 +97,7 @@ export abstract class CRUDFactory {
         } else {
             switch (error.status) {
                 case 401:
+                    //TODO: Open Login Form.
                     return Observable.empty();
             }
         }

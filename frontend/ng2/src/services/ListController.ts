@@ -6,6 +6,9 @@ import { UserFormComponent } from '../components/user-form/user-form-component';
 
 interface IConfigListController {
     service: CRUDFactory;
+    paginate: boolean;
+    limit: number;
+    filters: any;
 }
 
 export abstract class ListController {

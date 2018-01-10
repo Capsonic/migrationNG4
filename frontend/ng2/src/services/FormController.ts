@@ -16,31 +16,31 @@ export abstract class FormController {
 
 	//Start Form Methods
 	createInstance() {
-		return this.config.service.createInstance().subscribe(oInstance => {
+		return this.config.service.createInstance().map(oInstance => {
 			this.baseEntity = oInstance;
 			this.afterCreate();
+			return this.baseEntity;
 		});
 	}
 
-	load(oEntityOrID: any) {
-		this.refresh(oEntityOrID);
+	load(oEntityOrID: any): Observable<any> {
+		return this.refresh(oEntityOrID);
 	}
 
-	refresh(oEntityOrId: any) {
+	refresh(oEntityOrId: any): Observable<any> {
 		switch (true) {
 			case !oEntityOrId:				
-				this.createInstance();
-				break;
+				return this.createInstance();
 			case oEntityOrId > 0:
-				this.config.service.loadEntity(oEntityOrId)
-					.subscribe(oResult => {
+				return this.config.service.loadEntity(oEntityOrId)
+					.map(oResult => {
 						this.baseEntity = oResult.Result
+						this.afterLoad();
 					});
-				break;
 			case oEntityOrId instanceof Object || typeof (oEntityOrId) == 'object':				
 				this.baseEntity = oEntityOrId;
 				this.afterLoad();
-				break;
+				return Observable.empty();
 			default:
 				throw 'Invalid Form Init';
 		}
