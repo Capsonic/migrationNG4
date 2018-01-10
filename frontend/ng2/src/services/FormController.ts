@@ -29,7 +29,7 @@ export abstract class FormController {
 
 	refresh(oEntityOrId: any): Observable<any> {
 		switch (true) {
-			case !oEntityOrId:				
+			case !oEntityOrId:
 				return this.createInstance();
 			case oEntityOrId > 0:
 				return this.config.service.loadEntity(oEntityOrId)
@@ -37,7 +37,7 @@ export abstract class FormController {
 						this.baseEntity = oResult.Result
 						this.afterLoad();
 					});
-			case oEntityOrId instanceof Object || typeof (oEntityOrId) == 'object':				
+			case oEntityOrId instanceof Object || typeof (oEntityOrId) == 'object':
 				this.baseEntity = oEntityOrId;
 				this.afterLoad();
 				return Observable.empty();

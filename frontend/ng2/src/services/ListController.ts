@@ -6,9 +6,9 @@ import { UserFormComponent } from '../components/user-form/user-form-component';
 
 interface IConfigListController {
     service: CRUDFactory;
-    paginate: boolean;
-    limit: number;
-    filters: any;
+    paginate?: boolean;
+    limit?: number;
+    filters?: any;
 }
 
 export abstract class ListController {
@@ -47,7 +47,6 @@ export abstract class ListController {
         let profileModal = this.modal.create(UserFormComponent, { oEntityOrId: user.id });
         profileModal.dismiss(false);
         profileModal.present();
-
         profileModal.onDidDismiss(data => {
             this.load();
         });

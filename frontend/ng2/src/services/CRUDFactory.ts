@@ -30,6 +30,7 @@ export abstract class CRUDFactory {
     }
 
     createInstance():Observable<any> {
+        console.log('CRUDfactory > createInstance');
         return this.http.post(this.baseUrl + this.config.endPoint + '/create', null, this.addAuthorization())
             .map(this.extractData)
             .map(d => d.Result)
@@ -47,7 +48,8 @@ export abstract class CRUDFactory {
         return result;
     }
 
-    loadEntity(id, params?) {
+    loadEntity(id) {
+        console.log('CRUDFactory > loadEntity ' + this.baseUrl + this.config.endPoint + '/' + id);
         return this.http.get(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
             .map(this.extractData)
             .catch(this.generalError);
