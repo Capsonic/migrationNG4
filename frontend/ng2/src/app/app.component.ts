@@ -22,13 +22,9 @@ export class MyApp {
   rootPage: any = HomePage;
   pages: Array<{ title: string, component: any }>;
 
-  constructor(
-    public platform: Platform,
-    public modal: ModalController,
-    public actionsheetCtrl: ActionSheetController
-  ) {
-    this.initializeApp();
+  constructor( public platform: Platform, public modal: ModalController, public actionsheet: ActionSheetController) {
 
+    this.initializeApp();
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Users', component: UsersPage }
@@ -58,7 +54,7 @@ export class MyApp {
   }
 
   openMenu() {
-    let actionSheet = this.actionsheetCtrl.create({
+    let as = this.actionsheet.create({
       title: 'Administrator',
       cssClass: 'action-sheets-basic-page',
       buttons: [
@@ -81,7 +77,7 @@ export class MyApp {
         }
       ]
     });
-    actionSheet.present();
+    as.present();
   }
 
 

@@ -78,7 +78,7 @@ export abstract class CRUDFactory {
             .catch(this.generalError);
     }
 
-    private extractData(res: Response): ICommonResponse {
+    extractData(res: Response): ICommonResponse {
         const body: ICommonResponse = res.json();
         console.log(body);
         if (body.ErrorThrown) {
@@ -87,8 +87,7 @@ export abstract class CRUDFactory {
         return body;
     }
 
-    private generalError(error: any) {
-        console.log('STATUS |' + error.status);
+    generalError(error: any) {
         if (error.ErrorThrown) {
             switch (error.ErrorType) {
                 case "MESSAGE":
@@ -104,5 +103,3 @@ export abstract class CRUDFactory {
         return Observable.throw(error.statusText);
     }
 }
-
-// 56360140
