@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
-import { HttpModule } from '@angular/http';
+// import { HttpModule } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 
 //APPS
@@ -41,7 +42,7 @@ import { UsersPage } from '../pages/users/users-page';
 
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClient,
     IonicModule.forRoot(MyApp),
     CommonModule,
   ],

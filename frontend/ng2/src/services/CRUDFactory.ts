@@ -1,29 +1,33 @@
 import { Observable } from 'rxjs/RX';
-import { Response, Http, Headers, RequestOptions } from '@angular/http';
+// import { Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IConfig } from './IConfig';
 import { ICommonResponse } from './ICommonResponse';
 import { Config } from '../app/config';
 import { IEntity } from './IEntity';
 import alertify from 'alertifyjs';
+import { Injectable } from '@angular/core';
 
-export abstract class CRUDFactory {
+@Injectable()
+export  class CRUDFactory {
     baseUrl: string = Config.API_URL;
-    http: Http;
 
-    constructor(private config: IConfig) {
+    constructor(private config: IConfig, private http:HttpClient) {
     }
 
     addAuthorization() {
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        let authorization = new URLSearchParams();
-        let options = new RequestOptions({ headers: headers, params: authorization });
-
-        headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
-        return options
+        // let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        // let authorization = new URLSearchParams();
+        // let options = new RequestOptions({ headers: headers, params: authorization });
+        
+        let header = new HttpHeaders();
+        header.append('Content-Type','application/x-www-form-urlencoded');
+        header.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
+        return { headers: header };     
     }
 
     createEntity(object) {
-        return this.http.post(this.baseUrl + this.config.endPoint, '=' + encodeURIComponent(JSON.stringify(object)), this.addAuthorization())
+        return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint, '=' + encodeURIComponent(JSON.stringify(object)), this.addAuthorization())
             .map(this.extractData)
             .map(o => o.Result)
             .catch(this.generalError);
@@ -31,7 +35,7 @@ export abstract class CRUDFactory {
 
     createInstance():Observable<any> {
         console.log('CRUDfactory > createInstance');
-        return this.http.post(this.baseUrl + this.config.endPoint + '/create', null, this.addAuthorization())
+        return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint + '/create', null, this.addAuthorization())
             .map(this.extractData)
             .map(d => d.Result)
             .catch(this.generalError);
@@ -42,7 +46,7 @@ export abstract class CRUDFactory {
     }
 
     loadEntities(params?) {
-        const result = this.http.get(this.baseUrl + this.config.endPoint, this.addAuthorization())
+        const result = this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint, this.addAuthorization())
             .map(this.extractData)
             .catch(this.generalError);
         return result;
@@ -50,7 +54,7 @@ export abstract class CRUDFactory {
 
     loadEntity(id) {
         console.log('CRUDFactory > loadEntity ' + this.baseUrl + this.config.endPoint + '/' + id);
-        return this.http.get(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
+        return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
             .map(this.extractData)
             .catch(this.generalError);
     }
@@ -68,20 +72,20 @@ export abstract class CRUDFactory {
     }
 
     removeEntity(object, userId) {
-        return this.http.delete(this.baseUrl + this.config.endPoint + "/" + userId, this.addAuthorization())
+        return this.http.delete<ICommonResponse>(this.baseUrl + this.config.endPoint + "/" + userId, this.addAuthorization())
             .map(this.extractData)
             .catch(this.generalError);
     }
 
     updateEntity(object) {
-        return this.http.put(this.baseUrl + this.config.endPoint + '/' + object.id, '=' + encodeURIComponent(JSON.stringify(object)), this.addAuthorization())
+        return this.http.put<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + object.id, '=' + encodeURIComponent(JSON.stringify(object)), this.addAuthorization())
             .map(this.extractData)  
             .map(o => o.Result)
             .catch(this.generalError);
     }
 
-    extractData(res: Response): ICommonResponse {
-        const body: ICommonResponse = res.json();
+    extractData(res: ICommonResponse): ICommonResponse {
+        const body: ICommonResponse = res;
         console.log(body);
         if (body.ErrorThrown) {
             throw body;
