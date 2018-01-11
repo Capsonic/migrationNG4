@@ -23,24 +23,24 @@ export abstract class FormController {
 		});
 	}
 
-	load(oEntityOrID: any): Observable<any> {
-		return this.refresh(oEntityOrID);
+	load(oEntityOrID: any) {
+		this.refresh(oEntityOrID);
 	}
 
-	refresh(oEntityOrId: any): Observable<any> {
+	refresh(oEntityOrId: any) {
 		switch (true) {
 			case !oEntityOrId:
-				return this.createInstance();
+				this.createInstance();
 			case oEntityOrId > 0:
-				return this.config.service.loadEntity(oEntityOrId)
-					.map(oResult => {
+				this.config.service.loadEntity(oEntityOrId)
+					.subscribe(oResult => {
 						this.baseEntity = oResult.Result
 						this.afterLoad();
 					});
+				break;
 			case oEntityOrId instanceof Object || typeof (oEntityOrId) == 'object':
 				this.baseEntity = oEntityOrId;
 				this.afterLoad();
-				return Observable.empty();
 			default:
 				throw 'Invalid Form Init';
 		}

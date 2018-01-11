@@ -6,13 +6,11 @@ import { ICommonResponse } from './ICommonResponse';
 import { Config } from '../app/config';
 import { IEntity } from './IEntity';
 import alertify from 'alertifyjs';
-import { Injectable } from '@angular/core';
 
-@Injectable()
-export  class CRUDFactory {
+export abstract class CRUDFactory {
     baseUrl: string = Config.API_URL;
-
-    constructor(private config: IConfig, private http:HttpClient) {
+    protected http: HttpClient;
+    constructor(private config: IConfig) {
     }
 
     addAuthorization() {
@@ -20,10 +18,10 @@ export  class CRUDFactory {
         // let authorization = new URLSearchParams();
         // let options = new RequestOptions({ headers: headers, params: authorization });
         
-        let header = new HttpHeaders();
-        header.append('Content-Type','application/x-www-form-urlencoded');
-        header.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
-        return { headers: header };     
+        let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.append('Content-Type','application/x-www-form-urlencoded');
+        headers = headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
+        return { headers: headers };     
     }
 
     createEntity(object) {
@@ -55,6 +53,14 @@ export  class CRUDFactory {
     loadEntity(id) {
         console.log('CRUDFactory > loadEntity ' + this.baseUrl + this.config.endPoint + '/' + id);
         return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
+            // .subscribe(
+            //     r => {
+            //         console.log(r)
+            //     },
+            //     e => {
+            //         console.log(e);
+            //     }
+            // );
             .map(this.extractData)
             .catch(this.generalError);
     }

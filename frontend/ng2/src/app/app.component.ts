@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { Nav, Platform, ActionSheetController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 
@@ -11,8 +10,7 @@ import { UsersPage } from '../pages/users/users-page';
 import { LoginComponent } from '../components/login/login';
 
 @Component({
-  templateUrl: 'app.html',
-  providers: [HttpModule]
+  templateUrl: 'app.html'
 })
 
 export class MyApp {
