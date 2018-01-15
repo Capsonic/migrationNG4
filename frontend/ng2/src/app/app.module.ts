@@ -1,10 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
-<<<<<<< HEAD
-=======
-// import { HttpModule } from '@angular/http';
->>>>>>> cf12caf38a0b366fb6f3c67ba02b3cff34ec5c25
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 

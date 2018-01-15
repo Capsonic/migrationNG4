@@ -24,29 +24,17 @@ export abstract class FormController {
 	}
 
 	load(oEntityOrID: any) {
-<<<<<<< HEAD
 		return this.refresh(oEntityOrID);
-	}
-
-	refresh(oEntityOrId: any){
-		switch (true) {
-			case !oEntityOrId:
-				this.createInstance();
-				break;
-			case oEntityOrId > 0:
-				this.config.service.loadEntity(oEntityOrId).subscribe(oResult => {
-=======
-		this.refresh(oEntityOrID);
 	}
 
 	refresh(oEntityOrId: any) {
 		switch (true) {
 			case !oEntityOrId:
 				this.createInstance();
+				break;
 			case oEntityOrId > 0:
 				this.config.service.loadEntity(oEntityOrId)
 					.subscribe(oResult => {
->>>>>>> cf12caf38a0b366fb6f3c67ba02b3cff34ec5c25
 						this.baseEntity = oResult.Result
 						this.afterLoad();
 					});
@@ -54,6 +42,7 @@ export abstract class FormController {
 			case oEntityOrId instanceof Object || typeof (oEntityOrId) == 'object':
 				this.baseEntity = oEntityOrId;
 				this.afterLoad();
+				break;
 			default:
 				throw 'Invalid Form Init';
 		}

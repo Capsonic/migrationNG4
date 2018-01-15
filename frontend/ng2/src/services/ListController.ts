@@ -1,8 +1,6 @@
 import { CRUDFactory } from './CRUDFactory';
 import { IEntity } from './IEntity';
 import alertify from 'alertifyjs';
-import { ModalController } from 'ionic-angular';
-import { UserFormComponent } from '../components/user-form/user-form-component';
 
 interface IConfigListController {
     service: CRUDFactory;
