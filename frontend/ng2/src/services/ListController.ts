@@ -15,7 +15,7 @@ export abstract class ListController {
 
     protected baseList: Array<IEntity>;
 
-    constructor(public config: IConfigListController, public modal: ModalController) {
+    constructor(public config: IConfigListController) {
     }
 
     //Start List Methods
@@ -43,13 +43,16 @@ export abstract class ListController {
     makeQueryParameters() {
     }
 
-    openItem(user) {
-        let profileModal = this.modal.create(UserFormComponent, { oEntityOrId: user.id });
-        profileModal.dismiss(false);
-        profileModal.present();
-        profileModal.onDidDismiss(data => {
-            this.load();
-        });
+    openItem(oEntity) {
+        var theArguments = Array.prototype.slice.call(arguments);
+        this.onOpenItem.apply(this, theArguments);
+
+        // let profileModal = this.modal.create(UserFormComponent, { oEntityOrId: user.id });
+        // profileModal.dismiss(false);
+        // profileModal.present();
+        // profileModal.onDidDismiss(data => {
+        //     this.load();
+        // });
     }
 
     pageChanged() {
@@ -115,7 +118,7 @@ export abstract class ListController {
     //Start Hooks
     abstract afterLoad();
 
-    abstract onOpenItem();
+    abstract onOpenItem(oEntity);
 
     abstract afterRemove();
 

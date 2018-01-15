@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { Nav, Platform, ActionSheetController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 
@@ -12,7 +11,6 @@ import { LoginComponent } from '../components/login/login';
 
 @Component({
   templateUrl: 'app.html',
-  providers: [HttpModule]
 })
 
 export class MyApp {
@@ -42,7 +40,8 @@ export class MyApp {
   }
 
   openPage(page) {
-    this.nav.setRoot(page.component);
+    console.log('PAGE ' + page.component);
+    // this.nav.setRoot(page.component);
   }
 
   openHome(){

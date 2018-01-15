@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/RX';
-import { Response, Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 import { IConfig } from './IConfig';
 import { ICommonResponse } from './ICommonResponse';
 import { Config } from '../app/config';
@@ -8,30 +8,27 @@ import alertify from 'alertifyjs';
 
 export abstract class CRUDFactory {
     baseUrl: string = Config.API_URL;
-    http: Http;
-
+    protected http: HttpClient;
     constructor(private config: IConfig) {
     }
 
     addAuthorization() {
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        let authorization = new URLSearchParams();
-        let options = new RequestOptions({ headers: headers, params: authorization });
+        let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        headers = headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
 
-        headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
-        return options
+        return { headers: headers };
     }
 
     createEntity(object) {
-        return this.http.post(this.baseUrl + this.config.endPoint, '=' + encodeURIComponent(JSON.stringify(object)), this.addAuthorization())
+        return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint, '=' + encodeURIComponent(JSON.stringify(object)), this.addAuthorization())
             .map(this.extractData)
             .map(o => o.Result)
             .catch(this.generalError);
     }
 
     createInstance():Observable<any> {
-        console.log('CRUDfactory > createInstance');
-        return this.http.post(this.baseUrl + this.config.endPoint + '/create', null, this.addAuthorization())
+        return this.http.get(this.baseUrl + this.config.endPoint + '/create', this.addAuthorization())
             .map(this.extractData)
             .map(d => d.Result)
             .catch(this.generalError);
@@ -49,7 +46,6 @@ export abstract class CRUDFactory {
     }
 
     loadEntity(id) {
-        console.log('CRUDFactory > loadEntity ' + this.baseUrl + this.config.endPoint + '/' + id);
         return this.http.get(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
             .map(this.extractData)
             .catch(this.generalError);
@@ -80,8 +76,8 @@ export abstract class CRUDFactory {
             .catch(this.generalError);
     }
 
-    extractData(res: Response): ICommonResponse {
-        const body: ICommonResponse = res.json();
+    extractData(res: ICommonResponse): ICommonResponse {
+        const body: ICommonResponse = res;
         console.log(body);
         if (body.ErrorThrown) {
             throw body;

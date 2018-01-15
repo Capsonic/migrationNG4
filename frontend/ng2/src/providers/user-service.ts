@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CRUDFactory } from '../services/CRUDFactory';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http'; 
 
 @Injectable()
 export class UserServiceProvider extends CRUDFactory {
 
-  constructor(http: Http) {
-    super({
-      endPoint: 'User',
-      adapterIn: 1,
-      adapterOut: 1
-    });
-    this.http = http;
+  constructor(public http: HttpClient) {
+    super({ endPoint: 'User'});
   }
 
 }

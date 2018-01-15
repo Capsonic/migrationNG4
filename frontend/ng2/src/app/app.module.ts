@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 
 //APPS
@@ -19,9 +19,7 @@ import { UsersComponent } from '../components/users/users-component';
 import { FooterComponent } from '../components/footer/footer-component';
 
 //PROVIDERS
-import { FirstServiceProvider } from '../providers/first-service';
 import { UserServiceProvider } from '../providers/user-service';
-import { SecondServiceProvider } from '../providers/second-service';
 import { UserFormComponent } from '../components/user-form/user-form-component';
 import { UsersPage } from '../pages/users/users-page';
 
@@ -41,7 +39,7 @@ import { UsersPage } from '../pages/users/users-page';
 
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     CommonModule,
   ],
@@ -62,9 +60,7 @@ import { UsersPage } from '../pages/users/users-page';
   providers: [
     LoginService,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    FirstServiceProvider,
-    UserServiceProvider,
-    SecondServiceProvider
+    UserServiceProvider
   ]
 })
 export class AppModule {}
