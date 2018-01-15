@@ -10,7 +10,11 @@ import { UsersPage } from '../pages/users/users-page';
 import { LoginComponent } from '../components/login/login';
 
 @Component({
+<<<<<<< HEAD
   templateUrl: 'app.html',
+=======
+  templateUrl: 'app.html'
+>>>>>>> cf12caf38a0b366fb6f3c67ba02b3cff34ec5c25
 })
 
 export class MyApp {

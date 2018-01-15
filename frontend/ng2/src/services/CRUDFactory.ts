@@ -1,5 +1,10 @@
 import { Observable } from 'rxjs/RX';
+<<<<<<< HEAD
 import { HttpClient, HttpHeaders } from '@angular/common/http'; 
+=======
+// import { Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+>>>>>>> cf12caf38a0b366fb6f3c67ba02b3cff34ec5c25
 import { IConfig } from './IConfig';
 import { ICommonResponse } from './ICommonResponse';
 import { Config } from '../app/config';
@@ -13,11 +18,22 @@ export abstract class CRUDFactory {
     }
 
     addAuthorization() {
+<<<<<<< HEAD
         let headers: HttpHeaders = new HttpHeaders();
         headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
         headers = headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
 
         return { headers: headers };
+=======
+        // let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        // let authorization = new URLSearchParams();
+        // let options = new RequestOptions({ headers: headers, params: authorization });
+        
+        let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.append('Content-Type','application/x-www-form-urlencoded');
+        headers = headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
+        return { headers: headers };     
+>>>>>>> cf12caf38a0b366fb6f3c67ba02b3cff34ec5c25
     }
 
     createEntity(object) {
@@ -28,7 +44,12 @@ export abstract class CRUDFactory {
     }
 
     createInstance():Observable<any> {
+<<<<<<< HEAD
         return this.http.get(this.baseUrl + this.config.endPoint + '/create', this.addAuthorization())
+=======
+        console.log('CRUDfactory > createInstance');
+        return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint + '/create', null, this.addAuthorization())
+>>>>>>> cf12caf38a0b366fb6f3c67ba02b3cff34ec5c25
             .map(this.extractData)
             .map(d => d.Result)
             .catch(this.generalError);
@@ -39,14 +60,27 @@ export abstract class CRUDFactory {
     }
 
     loadEntities(params?) {
-        const result = this.http.get(this.baseUrl + this.config.endPoint, this.addAuthorization())
+        const result = this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint, this.addAuthorization())
             .map(this.extractData)
             .catch(this.generalError);
         return result;
     }
 
     loadEntity(id) {
+<<<<<<< HEAD
         return this.http.get(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
+=======
+        console.log('CRUDFactory > loadEntity ' + this.baseUrl + this.config.endPoint + '/' + id);
+        return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
+            // .subscribe(
+            //     r => {
+            //         console.log(r)
+            //     },
+            //     e => {
+            //         console.log(e);
+            //     }
+            // );
+>>>>>>> cf12caf38a0b366fb6f3c67ba02b3cff34ec5c25
             .map(this.extractData)
             .catch(this.generalError);
     }
@@ -64,13 +98,13 @@ export abstract class CRUDFactory {
     }
 
     removeEntity(object, userId) {
-        return this.http.delete(this.baseUrl + this.config.endPoint + "/" + userId, this.addAuthorization())
+        return this.http.delete<ICommonResponse>(this.baseUrl + this.config.endPoint + "/" + userId, this.addAuthorization())
             .map(this.extractData)
             .catch(this.generalError);
     }
 
     updateEntity(object) {
-        return this.http.put(this.baseUrl + this.config.endPoint + '/' + object.id, '=' + encodeURIComponent(JSON.stringify(object)), this.addAuthorization())
+        return this.http.put<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + object.id, '=' + encodeURIComponent(JSON.stringify(object)), this.addAuthorization())
             .map(this.extractData)  
             .map(o => o.Result)
             .catch(this.generalError);

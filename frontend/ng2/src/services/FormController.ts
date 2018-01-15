@@ -24,6 +24,7 @@ export abstract class FormController {
 	}
 
 	load(oEntityOrID: any) {
+<<<<<<< HEAD
 		return this.refresh(oEntityOrID);
 	}
 
@@ -34,6 +35,18 @@ export abstract class FormController {
 				break;
 			case oEntityOrId > 0:
 				this.config.service.loadEntity(oEntityOrId).subscribe(oResult => {
+=======
+		this.refresh(oEntityOrID);
+	}
+
+	refresh(oEntityOrId: any) {
+		switch (true) {
+			case !oEntityOrId:
+				this.createInstance();
+			case oEntityOrId > 0:
+				this.config.service.loadEntity(oEntityOrId)
+					.subscribe(oResult => {
+>>>>>>> cf12caf38a0b366fb6f3c67ba02b3cff34ec5c25
 						this.baseEntity = oResult.Result
 						this.afterLoad();
 					});
