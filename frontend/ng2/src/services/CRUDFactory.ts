@@ -14,14 +14,10 @@ export abstract class CRUDFactory {
     }
 
     addAuthorization() {
-        // let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        // let authorization = new URLSearchParams();
-        // let options = new RequestOptions({ headers: headers, params: authorization });
-        
         let headers: HttpHeaders = new HttpHeaders();
         headers = headers.append('Content-Type','application/x-www-form-urlencoded');
         headers = headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
-        return { headers: headers };     
+        return { headers: headers };
     }
 
     createEntity(object) {
@@ -32,8 +28,7 @@ export abstract class CRUDFactory {
     }
 
     createInstance():Observable<any> {
-        console.log('CRUDfactory > createInstance');
-        return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint + '/create', null, this.addAuthorization())
+        return this.http.get(this.baseUrl + this.config.endPoint + '/create', this.addAuthorization())
             .map(this.extractData)
             .map(d => d.Result)
             .catch(this.generalError);
@@ -51,16 +46,8 @@ export abstract class CRUDFactory {
     }
 
     loadEntity(id) {
-        console.log('CRUDFactory > loadEntity ' + this.baseUrl + this.config.endPoint + '/' + id);
+        // return this.http.get(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
         return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
-            // .subscribe(
-            //     r => {
-            //         console.log(r)
-            //     },
-            //     e => {
-            //         console.log(e);
-            //     }
-            // );
             .map(this.extractData)
             .catch(this.generalError);
     }

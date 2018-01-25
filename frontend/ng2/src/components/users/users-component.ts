@@ -8,11 +8,10 @@ import { ListController } from '../../services/ListController';
   selector: 'users-component',
   templateUrl: 'users-component.html'
 })
-
 export class UsersComponent extends ListController implements OnInit {
 
   constructor(public userSerivceProvider: UserServiceProvider, public modal: ModalController) {
-    super({ service: userSerivceProvider }, modal);
+    super({ service: userSerivceProvider });
   }
 
   ngOnInit() {
@@ -31,7 +30,13 @@ export class UsersComponent extends ListController implements OnInit {
   afterLoad() {
   }
 
-  onOpenItem() {
+  onOpenItem(oEntity) {
+    let profileModal = this.modal.create(UserFormComponent, { oEntityOrId: oEntity.id });
+    profileModal.dismiss(false);
+    profileModal.present();
+    profileModal.onDidDismiss(data => {
+      this.load();
+    });
   }
   
   afterRemove() {

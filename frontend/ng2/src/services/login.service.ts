@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/RX';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Config } from '../app/config';
 
+
 @Injectable()
 export class LoginService {
     url = Config.API_URL;
@@ -11,14 +12,10 @@ export class LoginService {
     }
 
     getToken(body): Observable<any> {
-
-        let headers = new HttpHeaders();
-        headers.append('Content-Type','application/x-www-form-urlencoded');
-        let options = { headers: headers };
-        let result = this.http.post(this.url + 'token', body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
-        return result;
+        let headers = new HttpHeaders(); 
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        let options = { headers: headers};
+        return this.http.post(this.url + 'token', body, options).map(this.extractData).catch(this.handleError);
     }
 
     private extractData(res: Response) {

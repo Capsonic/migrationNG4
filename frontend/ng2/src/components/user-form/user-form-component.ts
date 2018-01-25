@@ -16,7 +16,6 @@ export class UserFormComponent extends FormController implements OnInit {
   }
 
   ngOnInit() {
-    console.log('user-form-component > ngoninit ' + this.params.get('oEntityOrId'));
      this.load(this.params.get('oEntityOrId'));
   }
 

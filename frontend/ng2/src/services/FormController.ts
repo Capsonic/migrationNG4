@@ -13,10 +13,10 @@ export abstract class FormController {
 	constructor(private config: IConfigFormController) {
 	}
 
-
+ 
 	//Start Form Methods
 	createInstance() {
-		return this.config.service.createInstance().map(oInstance => {
+		return this.config.service.createInstance().subscribe(oInstance => {
 			this.baseEntity = oInstance;
 			this.afterCreate();
 			return this.baseEntity;
@@ -24,13 +24,14 @@ export abstract class FormController {
 	}
 
 	load(oEntityOrID: any) {
-		this.refresh(oEntityOrID);
+		return this.refresh(oEntityOrID);
 	}
 
 	refresh(oEntityOrId: any) {
 		switch (true) {
 			case !oEntityOrId:
 				this.createInstance();
+				break;
 			case oEntityOrId > 0:
 				this.config.service.loadEntity(oEntityOrId)
 					.subscribe(oResult => {
@@ -41,6 +42,7 @@ export abstract class FormController {
 			case oEntityOrId instanceof Object || typeof (oEntityOrId) == 'object':
 				this.baseEntity = oEntityOrId;
 				this.afterLoad();
+				break;
 			default:
 				throw 'Invalid Form Init';
 		}

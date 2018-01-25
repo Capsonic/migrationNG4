@@ -40,7 +40,8 @@ export class MyApp {
   }
 
   openPage(page) {
-    this.nav.setRoot(page.component);
+    console.log('PAGE ' + page.component);
+    // this.nav.setRoot(page.component);
   }
 
   openHome(){
