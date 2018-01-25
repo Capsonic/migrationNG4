@@ -201,6 +201,30 @@ Frontend Migration from Angualr 1 to Angular 4:
     ☐ Horizontal Lists sortable by Drag and Drop.
     ☐ Selectize. (Single and Multiple selection).
     ☐ Attachments.
+        ☐ Search best existing component for angular ^2.
+        ☐ Parameters:
+            ☐ ownerEntity.
+            ☐ printMode.
+            ☐ kind.
+            ☐ readOnly.
+            ☐ customListBind.
+            ☐ customFolderBind.
+        ☐ ON_AFTER_ADDING_FILE: When user selects a file from browser.
+            ☐ Initialize local list if empty/null.
+            ☐ Add oAttachment selected to local list.
+            ☐ Trigger on_input_change.
+        ☐ ON_SUCCESS_ITEM: A single file was uploaded successfully.
+            ☐ Assign generated folder to AttachmentFolder property. (Could be a custom one).
+            ☐ Mark oAttachment in local list for not upload.
+        ☐ ON_COMPLETE_ALL: All files where uploaded successfully.
+            ☐ Resolve or Reject promise based on ErrorThrown.
+        ☐ ON_BEFORE_UPLOAD_ITEM: Called before an item is uploaded.
+            ☐ Point URL to "attachments" endpoint and add query parameters: "attachmentKind" and "targetFolder";
+        ☐ Should append an api to ownerEntity to interact with AttachmentsBox.
+        ☐ UPLOAD_FILES(): Function to start uploading all pending attachments.
+        ☐ REMOVE_ATTACHMENT(): Function to mark an attachment for being deleted (Attachment is actually deleted until user clicks Save).
+        ☐ CANCEL_REMOVE(): Unmarks attachment for being deleted.
+        ☐ ADD_ATTACHMENT(): Open Browser to search for a file.
     ☐ Buttons that do not accept double click.
     ☐ Confirm Buttons: Two actions in same space, maybe: first action just a click, second action: to slide to right.
     ☐ Alertify.
